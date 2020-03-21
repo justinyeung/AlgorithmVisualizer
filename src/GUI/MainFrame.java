@@ -12,6 +12,7 @@ import java.util.LinkedList;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 
+import Algorithms.DepthFirstSearch;
 import Algorithms.LinearGridSearch;
 import Model.CanvasCoords;
 import Model.SquareType;
@@ -67,7 +68,7 @@ public class MainFrame extends JFrame {
 					grid.setColorTypeCoord(x, y, Color.red, SquareType.ROOT);
 					grid.repaint();
 //					change root array coords in grid
-					grid.setRootCoords(x, y);
+					grid.setRootCoords(e.getX(), e.getY());
 				}else if(destClick){
 //					paint on to grid
 					grid.setColorTypeCoord(x, y, Color.blue, SquareType.DESTINATION);
@@ -124,27 +125,40 @@ public class MainFrame extends JFrame {
 			}
 
 			@Override
-			public void start() {
-				LinearGridSearch lgs = new LinearGridSearch(grid.getRootCoords(), grid.getArray());
-				LinkedList<CanvasCoords> sortOrder = lgs.getSortOrderQueue();
+			public void start(String algorithm) {
+				LinkedList<CanvasCoords> sortQueue;
+				
+//				conditional statement for which algorithm to use
+				if(algorithm == "Linear Grid Search") {
+					LinearGridSearch lgs = new LinearGridSearch(grid.getRootCoords(), grid.getArray());
+					sortQueue = lgs.getSortOrderQueue();
+					System.out.println("n: "+sortQueue.size());
+				}else if(algorithm == "Depth First Search") {
+					DepthFirstSearch dfs = new DepthFirstSearch(grid.getRootCoords(), grid.getArray());
+					sortQueue = dfs.getSortOrderQueue();
+					System.out.println("n: "+sortQueue.size());
+				}else {
+					sortQueue = new LinkedList<>();
+				}
+				
+//				action listener for timer below
 				ActionListener paintListener = new ActionListener() {
-					
 					@Override
 					public void actionPerformed(ActionEvent e) {
 //						paint coordinates yellow from print order queue
-						if(sortOrder.size() > 0) {
-							CanvasCoords head = sortOrder.remove();
+						if(sortQueue.size() > 0) {
+							CanvasCoords head = sortQueue.remove();
 							int x = head.getArrayX();
 							int y = head.getArrayY();
 							grid.setColorTypeCoord(x, y, Color.yellow, SquareType.SEARCHED);
 							grid.repaint();
 						}else {
-//							menu.resultArea.append("Hello");
 							timer.stop();
 						}
-						
 					}
 				};
+				
+//				timer for paint animation
 				timer = new Timer(10, paintListener);
 				timer.start();
 			}

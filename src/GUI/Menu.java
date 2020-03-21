@@ -5,9 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 
 public class Menu extends JPanel implements ActionListener{
 	
@@ -16,8 +15,11 @@ public class Menu extends JPanel implements ActionListener{
 	private JButton wallButton;
 	private JButton rootButton;
 	private JButton destButton;
-	protected JTextArea resultArea;
+	private JComboBox<String> selectionBox;
 	private ButtonListener buttonListener;
+	private String[] selections = {
+			"Linear Grid Search", 
+			"Depth First Search"};
 	
 	public Menu(){
 //		init components
@@ -26,7 +28,7 @@ public class Menu extends JPanel implements ActionListener{
 		wallButton = new JButton("Wall");
 		rootButton = new JButton("Root");
 		destButton = new JButton("Destination");
-//		resultArea = new JTextArea("Welcome to Algorithm Visualizer");
+		selectionBox = new JComboBox<String>(selections);
 		
 //		set layout
 		setLayout(new FlowLayout());
@@ -35,9 +37,9 @@ public class Menu extends JPanel implements ActionListener{
 		add(wallButton);
 		add(rootButton);
 		add(destButton);
+		add(selectionBox);
 		add(resetButton);
 		add(startButton);
-//		add(new JScrollPane(resultArea));
 		
 //		action listeners
 		startButton.addActionListener(this);
@@ -63,7 +65,8 @@ public class Menu extends JPanel implements ActionListener{
 		}else if(e.getSource() == wallButton) {
 			buttonListener.setWall();
 		}else if(e.getSource() == startButton) {
-			buttonListener.start();
+			System.out.println(selectionBox.getSelectedItem());
+			buttonListener.start((String) selectionBox.getSelectedItem());
 		}
 	}
 }

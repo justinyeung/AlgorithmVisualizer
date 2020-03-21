@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class Grid extends JPanel{
 	
 	private Square[][] squareArray;
-	private CanvasCoords currentRoot;
+	private CanvasCoords currentRoot; // canvas coords
 	private ArrayList<CanvasCoords> destArray;
 	
 	public Grid() {

@@ -5,5 +5,5 @@ public interface ButtonListener {
 	public abstract void setRoot();
 	public abstract void setDestination();
 	public abstract void setWall();
-	public abstract void start();
+	public abstract void start(String algorithm);
 }

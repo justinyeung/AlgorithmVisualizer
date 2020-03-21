@@ -14,7 +14,7 @@ public class LinearGridSearch extends Search{
 	
 //	search
 	public CanvasCoords search(Square[][] array, CanvasCoords root) {
-		return search(array[root.getX()][root.getY()]);
+		return search(array[root.getArrayX()][root.getArrayY()]);
 	}
 	public CanvasCoords search(Square square) {
 		Square right = square.getRight();
@@ -26,9 +26,9 @@ public class LinearGridSearch extends Search{
 			return new CanvasCoords(square.getXcoord(), square.getYcoord());
 		}
 		
-//		mark visited in squareArray and visitedArray, add to sort order
+//		mark visited in visitedArray, add to sort order
 		visitedArray[square.getArrCoordX()][square.getArrCoordY()] = true;
-		sortOrder.add(new CanvasCoords(square.getXcoord(), square.getYcoord()));
+		sortOrderQueue.add(new CanvasCoords(square.getXcoord(), square.getYcoord()));
 		
 //		traverse through neighbouring squares
 		if(right != null && right.getType() != SquareType.WALL && !isVisited(right)) {
