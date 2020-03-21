@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.LinkedList;
 
 import javax.swing.JFrame;
 import javax.swing.Timer;
@@ -125,13 +126,14 @@ public class MainFrame extends JFrame {
 			@Override
 			public void start() {
 				LinearGridSearch lgs = new LinearGridSearch(grid.getRootCoords(), grid.getArray());
+				LinkedList<CanvasCoords> sortOrder = lgs.getSortOrderQueue();
 				ActionListener paintListener = new ActionListener() {
-
+					
 					@Override
 					public void actionPerformed(ActionEvent e) {
 //						paint coordinates yellow from print order queue
-						if(lgs.sortOrderQueue.size() > 0) {
-							CanvasCoords head = lgs.sortOrderQueue.remove();
+						if(sortOrder.size() > 0) {
+							CanvasCoords head = sortOrder.remove();
 							int x = head.getArrayX();
 							int y = head.getArrayY();
 							grid.setColorTypeCoord(x, y, Color.yellow, SquareType.SEARCHED);
