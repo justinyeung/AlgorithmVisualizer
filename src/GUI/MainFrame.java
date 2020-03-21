@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.Timer;
 
 import Algorithms.LinearGridSearch;
+import Model.CanvasCoords;
 import Model.SquareType;
 
 import java.awt.Graphics;
@@ -123,49 +124,29 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public void start() {
-//				ActionListener paintListener = new ActionListener() {
-//					@Override
-//					public void actionPerformed(ActionEvent e) {
-//						// TODO Auto-generated method stub
-//						grid.repaint();
-//					}
-//				};
-//				
-//				LinearGridSearch lgs = new LinearGridSearch(grid.getRootCoords(), grid.getArray());
-//				for(int i = 0; i < lgs.sortOrder.size(); i++) {
-//					int x = lgs.sortOrder.get(i).getArrayX();
-//					int y = lgs.sortOrder.get(i).getArrayY();
-//					grid.setColorTypeCoord(x, y, Color.yellow, SquareType.SEARCHED);
-//					timer = new Timer(100, paintListener);
-//					timer.setRepeats(true);
-//					timer.start();
-//				}
 				LinearGridSearch lgs = new LinearGridSearch(grid.getRootCoords(), grid.getArray());
 				ActionListener paintListener = new ActionListener() {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						// TODO Auto-generated method stub
-						
-						if(lgs.sortOrder.size() > 0) {
-							int x = lgs.sortOrder.get(0).getArrayX();
-							int y = lgs.sortOrder.get(0).getArrayY();
+//						paint coordinates yellow from print order queue
+						if(lgs.sortOrderQueue.size() > 0) {
+							CanvasCoords head = lgs.sortOrderQueue.remove();
+							int x = head.getArrayX();
+							int y = head.getArrayY();
 							grid.setColorTypeCoord(x, y, Color.yellow, SquareType.SEARCHED);
 							grid.repaint();
-							lgs.sortOrder.remove(0);
 						}else {
 							timer.stop();
 						}
 						
 					}
 				};
-				timer = new Timer(100, paintListener);
+				timer = new Timer(10, paintListener);
 				timer.start();
 			}
 			
 		});
-		
-		
 		
 //		sets jframe
 		setVisible(true);
