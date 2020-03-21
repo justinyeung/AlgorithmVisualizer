@@ -137,6 +137,7 @@ public class MainFrame extends JFrame {
 							grid.setColorTypeCoord(x, y, Color.yellow, SquareType.SEARCHED);
 							grid.repaint();
 						}else {
+//							menu.resultArea.append("Hello");
 							timer.stop();
 						}
 						

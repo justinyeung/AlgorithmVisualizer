@@ -1,10 +1,13 @@
 package GUI;
 
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 public class Menu extends JPanel implements ActionListener{
 	
@@ -13,27 +16,35 @@ public class Menu extends JPanel implements ActionListener{
 	private JButton wallButton;
 	private JButton rootButton;
 	private JButton destButton;
+	protected JTextArea resultArea;
 	private ButtonListener buttonListener;
 	
-	public Menu() {
+	public Menu(){
+//		init components
 		startButton = new JButton("Start");
 		resetButton = new JButton("Reset");
 		wallButton = new JButton("Wall");
 		rootButton = new JButton("Root");
 		destButton = new JButton("Destination");
+//		resultArea = new JTextArea("Welcome to Algorithm Visualizer");
 		
-		add(startButton);
-		add(resetButton);
+//		set layout
+		setLayout(new FlowLayout());
+		
+//		add to menu
 		add(wallButton);
 		add(rootButton);
 		add(destButton);
+		add(resetButton);
+		add(startButton);
+//		add(new JScrollPane(resultArea));
 		
+//		action listeners
 		startButton.addActionListener(this);
 		resetButton.addActionListener(this);
 		wallButton.addActionListener(this);
 		rootButton.addActionListener(this);
 		destButton.addActionListener(this);
-		
 	}
 	
 	public void setButtonListener(ButtonListener listener) {
@@ -42,7 +53,7 @@ public class Menu extends JPanel implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+//		action listeners for jcomponents
 		if(e.getSource() == resetButton) {
 			buttonListener.reset();
 		}else if(e.getSource() == rootButton) {
