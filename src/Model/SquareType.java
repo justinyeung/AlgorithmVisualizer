@@ -1,5 +1,5 @@
 package Model;
 
 public enum SquareType {
-	SAFE, WALL, DESTINATION, ROOT;
+	SAFE, WALL, DESTINATION, ROOT, SEARCHED;
 }

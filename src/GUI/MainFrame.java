@@ -8,12 +8,17 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 
+import Model.LinearGridSearch;
+import Model.SquareType;
+
 import java.awt.Graphics;
 
 public class MainFrame extends JFrame {
 	
 	private Grid grid;
 	private Menu menu;
+	private boolean rootClick;
+	private boolean destClick;
 	
 	public MainFrame() {
 		super("Algorithm Visualizer");
@@ -31,27 +36,94 @@ public class MainFrame extends JFrame {
 		
 //		mouse listener
 		grid.addMouseListener(new MouseListener() {
-
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-				
-			}
+			public void mouseClicked(MouseEvent e) {}
 			@Override
 			public void mouseEntered(MouseEvent e) {}
 			@Override
 			public void mouseExited(MouseEvent e) {}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				System.out.println(e.getX() + "," + e.getY());
+//				System.out.println(e.getX() + "," + e.getY());
+				
+//				calculate array CanvasCoords given mouse address
 				int x = Math.floorDiv(e.getX(), 20);
 				int y = Math.floorDiv(e.getY(), 20);
-				grid.setColorCoord(x, y, Color.black);
-				grid.repaint();
+				
+//				change color of grid square depending on button press
+				if(rootClick) {
+//					paint on to grid, delete current root
+					if(grid.existsRoot()) {
+						int oldRootX = grid.getRootCoords().getX();
+						int oldRootY = grid.getRootCoords().getY();
+						grid.setColorTypeCoord(oldRootX, oldRootY, Color.white, SquareType.SAFE);
+					}
+					grid.setColorTypeCoord(x, y, Color.red, SquareType.ROOT);
+					grid.repaint();
+//					change root array coords in grid
+					grid.setRootCoords(x, y);
+				}else if(destClick){
+//					paint on to grid
+					grid.setColorTypeCoord(x, y, Color.blue, SquareType.DESTINATION);
+					grid.repaint();
+//					add to grid array of destinations
+					grid.addDest(x, y);
+				}else {
+					grid.setColorTypeCoord(x, y, Color.black, SquareType.WALL);
+					grid.repaint();
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {}
+		});
+		
+//		menu button functions (called from menu)
+		menu.setButtonListener(new ButtonListener() {
+			@Override
+			public void reset() {
+				for(int i = 0; i < 63; i++) {
+					for(int j = 0; j < 25; j++) {
+						if(grid.getType(i, j) != SquareType.SAFE) {
+							grid.setColorTypeCoord(i, j, Color.white, SquareType.SAFE);
+						}
+					}
+				}
+				grid.repaint();
+			}
+
+			@Override
+			public void setRoot() {
+				if(rootClick) {
+					rootClick = false;
+				}else {
+					rootClick = true;
+					destClick = false;
+				}
+			}
+
+			@Override
+			public void setDestination() {
+				if(destClick) {
+					destClick = false;
+				}else {
+					destClick = true;
+					rootClick = false;
+				}
+			}
+
+			@Override
+			public void setWall() {
+				destClick = false;
+				rootClick = false;
+			}
+
+			@Override
+			public void start() {
+				LinearGridSearch lgs = new LinearGridSearch(grid.getRootCoords(), grid.getArray());
+				grid.setSquareArray(lgs.getSquareArray());
+				grid.repaint();
+			}
+			
 		});
 		
 		

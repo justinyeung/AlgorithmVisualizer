@@ -1,10 +1,11 @@
 package Model;
 
-public class Coordinates {
+public class CanvasCoords {
+//	canvas CanvasCoords
 	private int x;
 	private int y;
 	
-	public Coordinates(int x, int y) {
+	public CanvasCoords(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -16,6 +17,12 @@ public class Coordinates {
 	public int getY() {
 		return this.y;
 	}
+	public int getArrayX() {
+		return Math.floorDiv(this.x, 20);
+	}
+	public int getArrayY() {
+		return Math.floorDiv(this.y, 20);
+	}
 	
 //	setters
 	public void setX(int x) {
@@ -25,7 +32,7 @@ public class Coordinates {
 		this.y = y;
 	}
 	
-	public boolean equals(Coordinates c) {
+	public boolean equals(CanvasCoords c) {
 		return c.getX() == this.x && c.getY() == this.y;
 	}
 }

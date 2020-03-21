@@ -7,20 +7,23 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import Model.CanvasCoords;
 import Model.Square;
+import Model.SquareType;
 
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.util.ArrayList;
 
 public class Grid extends JPanel{
 	
 	private Square[][] squareArray;
-	private int x;
-	private int y;
-	private Color color;
+	private CanvasCoords currentRoot;
+	private ArrayList<CanvasCoords> destArray;
 	
 	public Grid() {
+//		initialize dimensions
 		Dimension dim = getPreferredSize();
 		dim.height = 500;
 		setPreferredSize(dim);
@@ -30,7 +33,7 @@ public class Grid extends JPanel{
 		squareArray = new Square[63][25];
 		for(int i = 0; i < 63; i++) {
 			for(int j = 0; j < 25; j++) {
-				squareArray[i][j] = new Square(count, i * 20, j * 20, Color.white);
+				squareArray[i][j] = new Square(count, i * 20, j * 20, Color.white, SquareType.SAFE);
 				count++;
 			}
 		}
@@ -52,32 +55,61 @@ public class Grid extends JPanel{
 				}
 			}
 		}
-	}
-	
-	public void setX(int x) {
-		this.x = x;
-	}
-	public void setY(int y) {
-		this.y = y;
-	}
-	public void setColor(Color color) {
-		this.color = color;
-	}
-	public void setColorCoord(int x, int y, Color color) {
-		squareArray[x][y].setColor(color);
-	}
-	
-	public void reset() {
 		
+		destArray = new ArrayList<>();
 	}
+	
+//	getters
+	public Color getColor(int x, int y) {
+		return squareArray[x][y].getColor();
+	}
+	public CanvasCoords getRootCoords() {
+		return currentRoot;
+	}
+	public boolean existsRoot() {
+		return currentRoot != null;
+	}
+	public SquareType getType(int x, int y) {
+		return squareArray[x][y].getType();
+	}
+	public Square[][] getArray(){
+		return this.squareArray;
+	}
+	
+//	setters
+	public void setColorTypeCoord(int x, int y, Color color, SquareType type) {
+//		array coords
+		squareArray[x][y].setColor(color);
+		squareArray[x][y].setType(type);
+	}
+	public void setRootCoords(int x, int y) {
+//		array coords
+		if(this.existsRoot()) {
+			currentRoot.setX(x);
+			currentRoot.setY(y);
+		}else {
+			currentRoot = new CanvasCoords(x, y);
+		}
+	}
+	public void addDest(int x, int y) {
+		CanvasCoords current = new CanvasCoords(x,y);
+		destArray.add(current);
+	}
+	public void setSquareArray(Square[][] squareArr) {
+		this.squareArray = squareArr;
+	}
+	
 	
 	public void paint(Graphics g) {
 //		paint grid at init
+		int x;
+		int y;
+		Color color;
 		for(int i = 0; i < 63; i++) {
 			for(int j = 0; j < 25; j++) {
-				this.x = squareArray[i][j].getXcoord();
-				this.y = squareArray[i][j].getYcoord();
-				this.color = squareArray[i][j].getColor();
+				x = squareArray[i][j].getXcoord();
+				y = squareArray[i][j].getYcoord();
+				color = squareArray[i][j].getColor();
 				g.setColor(color);
 				g.fillRect(x, y, 20, 20);
 				g.setColor(Color.black);
