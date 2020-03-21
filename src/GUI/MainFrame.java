@@ -8,7 +8,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 
-import Model.LinearGridSearch;
+import Algorithms.LinearGridSearch;
 import Model.SquareType;
 
 import java.awt.Graphics;

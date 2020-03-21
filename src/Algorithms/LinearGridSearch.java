@@ -1,40 +1,18 @@
-package Model;
+package Algorithms;
 
-import java.awt.Color;
+import Model.CanvasCoords;
+import Model.Square;
+import Model.SquareType;
 
-public class LinearGridSearch {
-	private CanvasCoords root;
-	private Square[][] squareArray;
-	private boolean[][] visitedArray;
+public class LinearGridSearch extends Search{
 	
 	public LinearGridSearch(CanvasCoords root, Square[][] squareArray) {
-		this.root = root;
-		this.squareArray = squareArray;
-		this.visitedArray = new boolean[63][25];
+		super(root, squareArray);
 		CanvasCoords result = search(squareArray, root);
 		System.out.println(result.getArrayX() + ", " + result.getArrayY());
 	}
 	
-//	getters
-	public Square[][] getSquareArray() {
-		return this.squareArray;
-	}
-	
-//	setters
-	public void setVisited(int x, int y) {
-//		parameters are array coords
-		squareArray[x][y].setType(SquareType.SEARCHED);
-		squareArray[x][y].setColor(Color.yellow);
-	}
-	
-//	local methods
-	private boolean isVisited(Square square) {
-//		convert from canvas coords to array coords
-		System.out.println("X: "+square.getArrCoordX());
-		System.out.println("Y: "+square.getArrCoordY());
-		return visitedArray[square.getArrCoordX()][square.getArrCoordY()];
-	}
-	
+//	search
 	public CanvasCoords search(Square[][] array, CanvasCoords root) {
 		return search(array[root.getX()][root.getY()]);
 	}
