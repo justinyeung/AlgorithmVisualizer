@@ -33,6 +33,7 @@ public class Menu extends JPanel implements ActionListener{
 		wallButton.addActionListener(this);
 		rootButton.addActionListener(this);
 		destButton.addActionListener(this);
+		
 	}
 	
 	public void setButtonListener(ButtonListener listener) {

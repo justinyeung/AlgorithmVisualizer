@@ -26,9 +26,9 @@ public class LinearGridSearch extends Search{
 			return new CanvasCoords(square.getXcoord(), square.getYcoord());
 		}
 		
-//		mark visited in squareArray and visitedArray
-		setVisited(square.getArrCoordX(), square.getArrCoordY());
+//		mark visited in squareArray and visitedArray, add to sort order
 		visitedArray[square.getArrCoordX()][square.getArrCoordY()] = true;
+		sortOrder.add(new CanvasCoords(square.getXcoord(), square.getYcoord()));
 		
 //		traverse through neighbouring squares
 		if(right != null && right.getType() != SquareType.WALL && !isVisited(right)) {
