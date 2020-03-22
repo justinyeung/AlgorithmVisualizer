@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.LinkedList;
+import java.util.Stack;
 
 import javax.swing.JFrame;
 import javax.swing.Timer;
@@ -15,6 +16,7 @@ import javax.swing.Timer;
 import Algorithms.BreadthFirstSearch;
 import Algorithms.DepthFirstSearch;
 import Algorithms.LinearGridSearch;
+import Algorithms.Search.Node;
 import Model.CanvasCoords;
 import Model.SquareType;
 
@@ -128,19 +130,37 @@ public class MainFrame extends JFrame {
 			@Override
 			public void start(String algorithm) {
 				LinkedList<CanvasCoords> sortQueue;
+				Stack<CanvasCoords> pathList = new Stack<>();
+				Node dest;
 				
 //				conditional statement for which algorithm to use
 				if(algorithm == "Breadth First Search") {
+//					get sortorderqueue from bfs
 					BreadthFirstSearch bfs = new BreadthFirstSearch(grid.getRootCoords(), grid.getArray());
 					sortQueue = bfs.getSortOrderQueue();
 					System.out.println("n: "+sortQueue.size());
+					
+//					iterate through shortest path to add to queue for printing
+					dest = bfs.getDestinationPath();
+					while(dest != null) {
+						pathList.add(dest.item);
+						dest = dest.next;
+					}
 				}else if(algorithm == "Depth First Search") {
 					DepthFirstSearch dfs = new DepthFirstSearch(grid.getRootCoords(), grid.getArray());
 					sortQueue = dfs.getSortOrderQueue();
 					System.out.println("n: "+sortQueue.size());
+					
+//					iterate through shortest path to add to queue for printing
+					dest = dfs.getDestinationPath();
+					while(dest != null) {
+						pathList.add(dest.item);
+						dest = dest.next;
+					}
 				}else {
 					LinearGridSearch lgs = new LinearGridSearch(grid.getRootCoords(), grid.getArray());
 					sortQueue = lgs.getSortOrderQueue();
+					dest = lgs.getDestinationPath();
 					System.out.println("n: "+sortQueue.size());
 				}
 				
@@ -151,10 +171,15 @@ public class MainFrame extends JFrame {
 //						paint coordinates yellow from print order queue
 						if(!sortQueue.isEmpty()) {
 							CanvasCoords head = sortQueue.remove();
-							
 							int x = head.getArrayX();
 							int y = head.getArrayY();
-							grid.setColorTypeCoord(x, y, Color.yellow, SquareType.SEARCHED);
+							grid.setColorTypeCoord(x, y, Color.gray, SquareType.SEARCHED);
+							grid.repaint();
+						}else if(!pathList.isEmpty()) {
+							CanvasCoords head = pathList.pop();
+							int x = head.getArrayX();
+							int y = head.getArrayY();
+							grid.setColorTypeCoord(x, y, Color.yellow, SquareType.SHORTESTPATH);
 							grid.repaint();
 						}else {
 							timer.stop();

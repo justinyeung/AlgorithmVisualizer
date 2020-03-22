@@ -26,6 +26,7 @@ public class DepthFirstSearch extends Search{
 		
 //		push root to stack
 		stack.push(this.squareArray[this.root.getArrayX()][this.root.getArrayY()]);
+		previousNodes[root.getArrayX()][root.getArrayY()].item = new CanvasCoords(root.getX(), root.getY());
 		
 //		dfs iteratively
 		while(!stack.empty()) {
@@ -39,6 +40,7 @@ public class DepthFirstSearch extends Search{
 			
 //			check if destination
 			if(current.getType() == SquareType.DESTINATION) {
+				destinationPath = previousNodes[current.getArrCoordX()][current.getArrCoordY()];
 				return new CanvasCoords(current.getXcoord(), current.getYcoord());
 			}
 			
@@ -50,12 +52,20 @@ public class DepthFirstSearch extends Search{
 			
 			if(right != null && right.getType() != SquareType.WALL && !isVisited(right)) {
 				stack.push(right);
+				previousNodes[right.getArrCoordX()][right.getArrCoordY()].item = new CanvasCoords(right.getXcoord(), right.getYcoord());
+				previousNodes[right.getArrCoordX()][right.getArrCoordY()].next = previousNodes[current.getArrCoordX()][current.getArrCoordY()];
 			}else if(down != null && down.getType() != SquareType.WALL && !isVisited(down)) {
 				stack.push(down);
+				previousNodes[down.getArrCoordX()][down.getArrCoordY()].item = new CanvasCoords(down.getXcoord(), down.getYcoord());
+				previousNodes[down.getArrCoordX()][down.getArrCoordY()].next = previousNodes[current.getArrCoordX()][current.getArrCoordY()];
 			}else if(left != null && left.getType() != SquareType.WALL && !isVisited(left)) {
 				stack.push(left);
+				previousNodes[left.getArrCoordX()][left.getArrCoordY()].item = new CanvasCoords(left.getXcoord(), left.getYcoord());
+				previousNodes[left.getArrCoordX()][left.getArrCoordY()].next = previousNodes[current.getArrCoordX()][current.getArrCoordY()];
 			}else if(up != null && up.getType() != SquareType.WALL && !isVisited(up)) {
 				stack.push(up);
+				previousNodes[up.getArrCoordX()][up.getArrCoordY()].item = new CanvasCoords(up.getXcoord(), up.getYcoord());
+				previousNodes[up.getArrCoordX()][up.getArrCoordY()].next = previousNodes[current.getArrCoordX()][current.getArrCoordY()];
 			}else {
 				stack.pop();
 			}
