@@ -15,6 +15,7 @@ Instructions:
 
 Results:
 - Animation outlining how selected algorithm will work
+- Grey squares showing the squares that the algorithm checked
 - Yellow path showing the path the algorithm took to find destination
 
 Created using Java with Swing GUI
