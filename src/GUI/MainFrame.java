@@ -64,8 +64,8 @@ public class MainFrame extends JFrame {
 				if(rootClick) {
 //					paint on to grid, delete current root
 					if(grid.existsRoot()) {
-						int oldRootX = grid.getRootCoords().getX();
-						int oldRootY = grid.getRootCoords().getY();
+						int oldRootX = grid.getRootCoords().getArrayX();
+						int oldRootY = grid.getRootCoords().getArrayY();
 						grid.setColorTypeCoord(oldRootX, oldRootY, Color.white, SquareType.SAFE);
 					}
 					grid.setColorTypeCoord(x, y, Color.red, SquareType.ROOT);
@@ -77,7 +77,7 @@ public class MainFrame extends JFrame {
 					grid.setColorTypeCoord(x, y, Color.blue, SquareType.DESTINATION);
 					grid.repaint();
 //					add to grid array of destinations
-					grid.addDest(x, y);
+//					grid.addDest(x, y);
 				}else {
 					grid.setColorTypeCoord(x, y, Color.black, SquareType.WALL);
 					grid.repaint();
@@ -98,6 +98,13 @@ public class MainFrame extends JFrame {
 						}
 					}
 				}
+//				reset default root
+				grid.setColorTypeCoord(20, 12, Color.red, SquareType.ROOT);
+				grid.setRootCoords(20*20, 12*20);
+				
+//				initialize default destination
+				grid.setColorTypeCoord(43, 12, Color.blue, SquareType.DESTINATION);
+				
 				grid.repaint();
 			}
 

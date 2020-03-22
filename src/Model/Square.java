@@ -6,7 +6,7 @@ public class Square {
 	private int id;
 	private SquareType type;
 	private Color color;
-	private CanvasCoords coord; // canvas CanvasCoords
+	private CanvasCoords coord; // CanvasCoords
 	
 	private Square left;
 	private Square right;

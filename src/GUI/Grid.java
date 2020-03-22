@@ -16,14 +16,16 @@ public class Grid extends JPanel{
 	
 	private Square[][] squareArray; // array coords
 	private CanvasCoords currentRoot; // canvas coords
-	private ArrayList<CanvasCoords> destArray;
+//	TODO: turn destArray to canvas coords
+//	private ArrayList<CanvasCoords> destArray; // array coords
 	
 	public Grid() {
-//		initialize dimensions
+//		initialize
 		Dimension dim = getPreferredSize();
 		dim.height = 500;
 		setPreferredSize(dim);
 		int count = 0;
+//		destArray = new ArrayList<>();
 		
 //		initialize squares
 		squareArray = new Square[63][25];
@@ -33,6 +35,16 @@ public class Grid extends JPanel{
 				count++;
 			}
 		}
+		
+//		initialize default root
+		squareArray[20][12].setColor(Color.red);
+		squareArray[20][12].setType(SquareType.ROOT);
+		setRootCoords(20*20, 12*20);
+		
+//		initialize default destination
+		squareArray[43][12].setColor(Color.blue);
+		squareArray[43][12].setType(SquareType.DESTINATION);
+//		addDest(43, 12);
 		
 //		initialize square links
 		for(int i = 0; i < 63; i++) {
@@ -51,8 +63,6 @@ public class Grid extends JPanel{
 				}
 			}
 		}
-		
-		destArray = new ArrayList<>();
 	}
 	
 //	getters
@@ -87,10 +97,11 @@ public class Grid extends JPanel{
 			currentRoot = new CanvasCoords(x, y);
 		}
 	}
-	public void addDest(int x, int y) {
-		CanvasCoords current = new CanvasCoords(x,y);
-		destArray.add(current);
-	}
+//	public void addDest(int x, int y) {
+////		array coords
+//		CanvasCoords current = new CanvasCoords(x,y);
+//		destArray.add(current);
+//	}
 	public void setSquareArray(Square[][] squareArr) {
 		this.squareArray = squareArr;
 	}
