@@ -18,7 +18,7 @@ public class Menu extends JPanel implements ActionListener{
 	private JComboBox<String> selectionBox;
 	private ButtonListener buttonListener;
 	private String[] selections = {
-			"Linear Grid Search", 
+			"Breadth First Search", 
 			"Depth First Search"};
 	
 	public Menu(){

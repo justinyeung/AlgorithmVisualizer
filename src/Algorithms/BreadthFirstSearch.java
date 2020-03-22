@@ -32,10 +32,9 @@ public class BreadthFirstSearch extends Search{
 //			dequeue current
 			current = queue.remove();
 			
-//			mark as visited, add to sort order queue
-			visitedArray[current.getArrCoordX()][current.getArrCoordY()] = true;
+//			add to sort order queue
 			sortOrderQueue.add(new CanvasCoords(current.getXcoord(), current.getYcoord()));
-			
+
 //			check if destination
 			if(current.getType() == SquareType.DESTINATION) {
 				return new CanvasCoords(current.getXcoord(), current.getYcoord());
@@ -49,15 +48,19 @@ public class BreadthFirstSearch extends Search{
 			
 			if(right != null && right.getType() != SquareType.WALL && !isVisited(right)) {
 				queue.add(right);
+				visitedArray[right.getArrCoordX()][right.getArrCoordY()] = true;
 			}
 			if(down != null && down.getType() != SquareType.WALL && !isVisited(down)) {
-				queue.push(down);
+				queue.add(down);
+				visitedArray[down.getArrCoordX()][down.getArrCoordY()] = true;
 			}
 			if(left != null && left.getType() != SquareType.WALL && !isVisited(left)) {
-				queue.push(left);
+				queue.add(left);
+				visitedArray[left.getArrCoordX()][left.getArrCoordY()] = true;
 			}
 			if(up != null && up.getType() != SquareType.WALL && !isVisited(up)) {
-				queue.push(up);
+				queue.add(up);
+				visitedArray[up.getArrCoordX()][up.getArrCoordY()] = true;
 			}
 		}
 		

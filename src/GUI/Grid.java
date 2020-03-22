@@ -3,8 +3,6 @@ package GUI;
 import java.awt.Color;
 import java.awt.Dimension;
 
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import Model.CanvasCoords;
@@ -12,13 +10,11 @@ import Model.Square;
 import Model.SquareType;
 
 import java.awt.Graphics;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.util.ArrayList;
 
 public class Grid extends JPanel{
 	
-	private Square[][] squareArray;
+	private Square[][] squareArray; // array coords
 	private CanvasCoords currentRoot; // canvas coords
 	private ArrayList<CanvasCoords> destArray;
 	
@@ -83,7 +79,7 @@ public class Grid extends JPanel{
 		squareArray[x][y].setType(type);
 	}
 	public void setRootCoords(int x, int y) {
-//		array coords
+//		canvas coords
 		if(this.existsRoot()) {
 			currentRoot.setX(x);
 			currentRoot.setY(y);

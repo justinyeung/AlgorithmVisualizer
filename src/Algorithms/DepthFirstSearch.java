@@ -21,11 +21,11 @@ public class DepthFirstSearch extends Search{
 
 	
 	public CanvasCoords search() {
-//		push root to stack
-		System.out.println("root: "+this.root.getArrayX());
-		System.out.println("root: "+this.root.getArrayY());
-		stack.push(this.squareArray[this.root.getArrayX()][this.root.getArrayY()]);
+		
 		Square current;
+		
+//		push root to stack
+		stack.push(this.squareArray[this.root.getArrayX()][this.root.getArrayY()]);
 		
 //		dfs iteratively
 		while(!stack.empty()) {

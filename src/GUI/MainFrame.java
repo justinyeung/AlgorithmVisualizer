@@ -12,6 +12,7 @@ import java.util.LinkedList;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 
+import Algorithms.BreadthFirstSearch;
 import Algorithms.DepthFirstSearch;
 import Algorithms.LinearGridSearch;
 import Model.CanvasCoords;
@@ -67,7 +68,7 @@ public class MainFrame extends JFrame {
 					}
 					grid.setColorTypeCoord(x, y, Color.red, SquareType.ROOT);
 					grid.repaint();
-//					change root array coords in grid
+//					change root canvas coords
 					grid.setRootCoords(e.getX(), e.getY());
 				}else if(destClick){
 //					paint on to grid
@@ -129,16 +130,18 @@ public class MainFrame extends JFrame {
 				LinkedList<CanvasCoords> sortQueue;
 				
 //				conditional statement for which algorithm to use
-				if(algorithm == "Linear Grid Search") {
-					LinearGridSearch lgs = new LinearGridSearch(grid.getRootCoords(), grid.getArray());
-					sortQueue = lgs.getSortOrderQueue();
+				if(algorithm == "Breadth First Search") {
+					BreadthFirstSearch bfs = new BreadthFirstSearch(grid.getRootCoords(), grid.getArray());
+					sortQueue = bfs.getSortOrderQueue();
 					System.out.println("n: "+sortQueue.size());
 				}else if(algorithm == "Depth First Search") {
 					DepthFirstSearch dfs = new DepthFirstSearch(grid.getRootCoords(), grid.getArray());
 					sortQueue = dfs.getSortOrderQueue();
 					System.out.println("n: "+sortQueue.size());
 				}else {
-					sortQueue = new LinkedList<>();
+					LinearGridSearch lgs = new LinearGridSearch(grid.getRootCoords(), grid.getArray());
+					sortQueue = lgs.getSortOrderQueue();
+					System.out.println("n: "+sortQueue.size());
 				}
 				
 //				action listener for timer below
@@ -146,8 +149,9 @@ public class MainFrame extends JFrame {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 //						paint coordinates yellow from print order queue
-						if(sortQueue.size() > 0) {
+						if(!sortQueue.isEmpty()) {
 							CanvasCoords head = sortQueue.remove();
+							
 							int x = head.getArrayX();
 							int y = head.getArrayY();
 							grid.setColorTypeCoord(x, y, Color.yellow, SquareType.SEARCHED);
@@ -159,7 +163,7 @@ public class MainFrame extends JFrame {
 				};
 				
 //				timer for paint animation
-				timer = new Timer(10, paintListener);
+				timer = new Timer(5, paintListener);
 				timer.start();
 			}
 			
