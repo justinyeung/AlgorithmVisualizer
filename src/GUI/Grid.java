@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 
 import javax.swing.JPanel;
 
@@ -16,6 +17,7 @@ public class Grid extends JPanel{
 	
 	private Square[][] squareArray; // array coords
 	private CanvasCoords currentRoot; // canvas coords
+	private Font font = new Font("Arial", Font.BOLD, 14);
 //	TODO: turn destArray to canvas coords
 //	private ArrayList<CanvasCoords> destArray; // array coords
 	
@@ -45,6 +47,7 @@ public class Grid extends JPanel{
 		squareArray[43][12].setColor(Color.blue);
 		squareArray[43][12].setType(SquareType.DESTINATION);
 //		addDest(43, 12);
+		
 		
 //		initialize square links
 		for(int i = 0; i < 63; i++) {
@@ -109,19 +112,29 @@ public class Grid extends JPanel{
 	
 	public void paint(Graphics g) {
 //		paint grid at init
+		super.paint(g);
+		g.setFont(font);
 		int x;
 		int y;
 		Color color;
 		for(int i = 0; i < 63; i++) {
 			for(int j = 0; j < 25; j++) {
-				x = squareArray[i][j].getXcoord();
-				y = squareArray[i][j].getYcoord();
-				color = squareArray[i][j].getColor();
+				Square current = squareArray[i][j];
+				x = current.getXcoord(); // canvas coords
+				y = current.getYcoord();
+				color = current.getColor();
+//				draw color grids according to squareArray
 				g.setColor(color);
 				g.fillRect(x, y, 20, 20);
+//				draw rectangle borders
 				g.setColor(Color.black);
 				g.drawRect(x, y, 20, 20);
+//				draw height inside grid
+				g.drawString(current.getHeight().toString(), x+8, y+15);
 			}
 		}
+//		g.setColor(Color.black);
+
+		
 	}
 }

@@ -56,7 +56,7 @@ public class Square {
 	public int getArrCoordY() {
 		return Math.floorDiv(getYcoord(), 20);
 	}
-	public int getHeight() {
+	public Integer getHeight() {
 		return height;
 	}
 	
