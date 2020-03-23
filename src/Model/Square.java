@@ -7,6 +7,7 @@ public class Square {
 	private SquareType type;
 	private Color color;
 	private CanvasCoords coord; // CanvasCoords
+	private int height ;
 	
 	private Square left;
 	private Square right;
@@ -18,6 +19,7 @@ public class Square {
 		this.coord = new CanvasCoords(xcoord, ycoord);
 		this.setColor(color);
 		this.type = type;
+		this.height = 0;
 	}
 
 //	getters
@@ -54,6 +56,9 @@ public class Square {
 	public int getArrCoordY() {
 		return Math.floorDiv(getYcoord(), 20);
 	}
+	public Integer getHeight() {
+		return height;
+	}
 	
 //	setters
 	public void setColor(Color color) {
@@ -74,4 +79,20 @@ public class Square {
 	public void setType(SquareType type) {
 		this.type = type;
 	}
+	public void resetHeight() {
+		this.height = 0;
+	}
+	public void incHeight() {
+		if(height < 9) {
+			this.height++;
+		}
+	}
+	public void sinkHeight() {
+		if(height > -9) {
+			this.height--;
+		}
+	}
+	
+
+	
 }

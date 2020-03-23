@@ -11,11 +11,11 @@ import java.util.LinkedList;
 import java.util.Stack;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import Algorithms.BreadthFirstSearch;
 import Algorithms.DepthFirstSearch;
-import Algorithms.LinearGridSearch;
 import Algorithms.Search.Node;
 import Model.CanvasCoords;
 import Model.SquareType;
@@ -26,23 +26,34 @@ public class MainFrame extends JFrame {
 	
 	private Grid grid;
 	private Menu menu;
+	private JPanel menupanel;
 	private boolean rootClick;
 	private boolean destClick;
+	private boolean raiseHeight;
+	private boolean lowerHeight;
 	private Timer timer;
 	
 	public MainFrame() {
 		super("Algorithm Visualizer");
 		
-//		type of layout
-		setLayout(new BorderLayout());
-		
 //		initialize components
 		grid = new Grid();
 		menu = new Menu();
 		
-//		add components to JFrame
-		add(grid, BorderLayout.SOUTH);
-		add(menu, BorderLayout.NORTH);
+//		set type of layout for jframe
+		setLayout(new BorderLayout());
+		
+//		set layout and panel for menu buttons
+		menupanel = new JPanel();
+		menupanel.setLayout(new BorderLayout());
+
+//		add grid and menupanel to layout of JFrame
+		add(grid, BorderLayout.PAGE_END);
+		add(menupanel, BorderLayout.PAGE_START);
+//		add jframes to menupanel
+		menupanel.add(menu.firstline, BorderLayout.PAGE_START);
+		menupanel.add(menu.secondline, BorderLayout.CENTER);
+		menupanel.add(menu.lastline, BorderLayout.PAGE_END);
 		
 //		mouse listener
 		grid.addMouseListener(new MouseListener() {
@@ -54,8 +65,6 @@ public class MainFrame extends JFrame {
 			public void mouseExited(MouseEvent e) {}
 			@Override
 			public void mousePressed(MouseEvent e) {
-//				System.out.println(e.getX() + "," + e.getY());
-				
 //				calculate array CanvasCoords given mouse address
 				int x = Math.floorDiv(e.getX(), 20);
 				int y = Math.floorDiv(e.getY(), 20);
@@ -78,6 +87,12 @@ public class MainFrame extends JFrame {
 					grid.repaint();
 //					add to grid array of destinations
 //					grid.addDest(x, y);
+				}else if(raiseHeight) {
+					grid.raiseHeight(x, y);
+					grid.repaint();
+				}else if(lowerHeight) {
+					grid.lowerHeight(x, y);
+					grid.repaint();
 				}else {
 					grid.setColorTypeCoord(x, y, Color.black, SquareType.WALL);
 					grid.repaint();
@@ -96,6 +111,7 @@ public class MainFrame extends JFrame {
 						if(grid.getType(i, j) != SquareType.SAFE) {
 							grid.setColorTypeCoord(i, j, Color.white, SquareType.SAFE);
 						}
+						grid.resetHeight(i, j);
 					}
 				}
 //				reset default root
@@ -105,33 +121,48 @@ public class MainFrame extends JFrame {
 //				initialize default destination
 				grid.setColorTypeCoord(43, 12, Color.blue, SquareType.DESTINATION);
 				
+				
 				grid.repaint();
 			}
 
 			@Override
 			public void setRoot() {
-				if(rootClick) {
-					rootClick = false;
-				}else {
-					rootClick = true;
-					destClick = false;
-				}
+				rootClick = true;
+				destClick = false;
+				raiseHeight = false;
+				lowerHeight = false;
 			}
 
 			@Override
 			public void setDestination() {
-				if(destClick) {
-					destClick = false;
-				}else {
-					destClick = true;
-					rootClick = false;
-				}
+				rootClick = false;
+				destClick = true;
+				raiseHeight = false;
+				lowerHeight = false;
 			}
 
 			@Override
 			public void setWall() {
-				destClick = false;
 				rootClick = false;
+				destClick = false;
+				raiseHeight = false;
+				lowerHeight = false;
+			}
+			
+			@Override
+			public void raiseHeight() {
+				rootClick = false;
+				destClick = false;
+				raiseHeight = true;
+				lowerHeight = false;
+			}
+
+			@Override
+			public void lowerHeight() {
+				rootClick = false;
+				destClick = false;
+				raiseHeight = false;
+				lowerHeight = true;
 			}
 
 			@Override
@@ -149,10 +180,6 @@ public class MainFrame extends JFrame {
 					
 //					iterate through shortest path to add to queue for printing
 					dest = bfs.getDestinationPath();
-					while(dest != null) {
-						pathList.add(dest.item);
-						dest = dest.next;
-					}
 				}else if(algorithm == "Depth First Search") {
 					DepthFirstSearch dfs = new DepthFirstSearch(grid.getRootCoords(), grid.getArray());
 					sortQueue = dfs.getSortOrderQueue();
@@ -160,17 +187,15 @@ public class MainFrame extends JFrame {
 					
 //					iterate through shortest path to add to queue for printing
 					dest = dfs.getDestinationPath();
-					while(dest != null) {
-						pathList.add(dest.item);
-						dest = dest.next;
-					}
 				}else {
-					LinearGridSearch lgs = new LinearGridSearch(grid.getRootCoords(), grid.getArray());
-					sortQueue = lgs.getSortOrderQueue();
-					dest = lgs.getDestinationPath();
-					System.out.println("n: "+sortQueue.size());
+					sortQueue = new LinkedList<>();
+					dest = null;
+					System.out.println("No algorithm selected");
 				}
-				
+				while(dest != null) {
+					pathList.add(dest.item);
+					dest = dest.next;
+				}
 //				action listener for timer below
 				ActionListener paintListener = new ActionListener() {
 					@Override
@@ -198,7 +223,6 @@ public class MainFrame extends JFrame {
 				timer = new Timer(5, paintListener);
 				timer.start();
 			}
-			
 		});
 		
 //		sets jframe
