@@ -110,9 +110,11 @@ public class Grid extends JPanel{
 		this.squareArray = squareArr;
 	}
 	public void raiseHeight(int x, int y) {
+//		add logic to create hills
 		squareArray[x][y].incHeight();
 	}
 	public void lowerHeight(int x, int y) {
+//		add logic to create hills
 		squareArray[x][y].sinkHeight();
 	}
 	

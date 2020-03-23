@@ -16,7 +16,6 @@ import javax.swing.Timer;
 
 import Algorithms.BreadthFirstSearch;
 import Algorithms.DepthFirstSearch;
-import Algorithms.LinearGridSearch;
 import Algorithms.Search.Node;
 import Model.CanvasCoords;
 import Model.SquareType;
@@ -51,6 +50,7 @@ public class MainFrame extends JFrame {
 //		add grid and menupanel to layout of JFrame
 		add(grid, BorderLayout.PAGE_END);
 		add(menupanel, BorderLayout.PAGE_START);
+//		add jframes to menupanel
 		menupanel.add(menu.firstline, BorderLayout.PAGE_START);
 		menupanel.add(menu.secondline, BorderLayout.CENTER);
 		menupanel.add(menu.lastline, BorderLayout.PAGE_END);
@@ -192,10 +192,6 @@ public class MainFrame extends JFrame {
 					
 //					iterate through shortest path to add to queue for printing
 					dest = bfs.getDestinationPath();
-					while(dest != null) {
-						pathList.add(dest.item);
-						dest = dest.next;
-					}
 				}else if(algorithm == "Depth First Search") {
 					DepthFirstSearch dfs = new DepthFirstSearch(grid.getRootCoords(), grid.getArray());
 					sortQueue = dfs.getSortOrderQueue();
@@ -203,16 +199,15 @@ public class MainFrame extends JFrame {
 					
 //					iterate through shortest path to add to queue for printing
 					dest = dfs.getDestinationPath();
-					while(dest != null) {
-						pathList.add(dest.item);
-						dest = dest.next;
-					}
 				}else {
 					sortQueue = new LinkedList<>();
 					dest = null;
 					System.out.println("No algorithm selected");
 				}
-				
+				while(dest != null) {
+					pathList.add(dest.item);
+					dest = dest.next;
+				}
 //				action listener for timer below
 				ActionListener paintListener = new ActionListener() {
 					@Override

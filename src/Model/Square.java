@@ -79,11 +79,13 @@ public class Square {
 	public void setType(SquareType type) {
 		this.type = type;
 	}
-	public void setHeight(int height) {
-		this.height = height;
-	}
+//	public void setHeight(int height) {
+//		this.height = height;
+//	}
 	public void incHeight() {
-		this.height++;
+		if(height < 9) {
+			this.height++;
+		}
 	}
 	public void sinkHeight() {
 		if(height > 0) {
