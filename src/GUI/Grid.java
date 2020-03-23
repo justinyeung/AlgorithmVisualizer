@@ -106,18 +106,61 @@ public class Grid extends JPanel{
 //		CanvasCoords current = new CanvasCoords(x,y);
 //		destArray.add(current);
 //	}
+	public void resetHeight(int x, int y) {
+		squareArray[x][y].resetHeight();
+	}
 	public void setSquareArray(Square[][] squareArr) {
 		this.squareArray = squareArr;
 	}
 	public void raiseHeight(int x, int y) {
 //		add logic to create hills
-		squareArray[x][y].incHeight();
+		Square current = squareArray[x][y];
+		Square right = current.getRight();
+		Square down = current.getDown();
+		Square left = current.getLeft();
+		Square up = current.getUp();
+		
+		
+		
+
+		
+//		right
+		if(current.getRight() != null && right.getHeight() < current.getHeight()) {
+			raiseHeight(right.getArrCoordX(), right.getArrCoordY());
+		}
+//		down
+		if(current.getDown() != null && down.getHeight() >= 0 && down.getHeight() < current.getHeight()) {
+			raiseHeight(down.getArrCoordX(), down.getArrCoordY());
+		}
+//		left
+		if(current.getLeft() != null && left.getHeight() >= 0 && left.getHeight() < current.getHeight()) {
+			raiseHeight(left.getArrCoordX(), left.getArrCoordY());
+		}
+//		up
+		if(current.getUp() != null && up.getHeight() >= 0 && up.getHeight() < current.getHeight()) {
+			raiseHeight(up.getArrCoordX(), up.getArrCoordY());
+		}
+
+		current.incHeight();
+		
+		if(current.getHeight() == 0) {
+			return;
+		}
 	}
 	public void lowerHeight(int x, int y) {
 //		add logic to create hills
 		squareArray[x][y].sinkHeight();
+		
+//		right
+		
+//		down
+		
+//		left
+		
+//		up
+		
+		
 	}
-	
 	
 	public void paint(Graphics g) {
 //		paint grid at init
@@ -142,8 +185,5 @@ public class Grid extends JPanel{
 				g.drawString(current.getHeight().toString(), x+8, y+15);
 			}
 		}
-//		g.setColor(Color.black);
-
-		
 	}
 }
