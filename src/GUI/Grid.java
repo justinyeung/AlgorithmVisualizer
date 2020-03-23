@@ -17,6 +17,7 @@ public class Grid extends JPanel{
 	
 	private Square[][] squareArray; // array coords
 	private CanvasCoords currentRoot; // canvas coords
+	
 	private Font font = new Font("Arial", Font.BOLD, 14);
 //	TODO: turn destArray to canvas coords
 //	private ArrayList<CanvasCoords> destArray; // array coords
@@ -107,6 +108,12 @@ public class Grid extends JPanel{
 //	}
 	public void setSquareArray(Square[][] squareArr) {
 		this.squareArray = squareArr;
+	}
+	public void raiseHeight(int x, int y) {
+		squareArray[x][y].incHeight();
+	}
+	public void lowerHeight(int x, int y) {
+		squareArray[x][y].sinkHeight();
 	}
 	
 	

@@ -82,6 +82,14 @@ public class Square {
 	public void setHeight(int height) {
 		this.height = height;
 	}
+	public void incHeight() {
+		this.height++;
+	}
+	public void sinkHeight() {
+		if(height > 0) {
+			this.height--;
+		}
+	}
 	
 
 	

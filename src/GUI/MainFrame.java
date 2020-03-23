@@ -30,6 +30,8 @@ public class MainFrame extends JFrame {
 	private JPanel menupanel;
 	private boolean rootClick;
 	private boolean destClick;
+	private boolean raiseHeight;
+	private boolean lowerHeight;
 	private Timer timer;
 	
 	public MainFrame() {
@@ -87,6 +89,12 @@ public class MainFrame extends JFrame {
 					grid.repaint();
 //					add to grid array of destinations
 //					grid.addDest(x, y);
+				}else if(raiseHeight) {
+					grid.raiseHeight(x, y);
+					grid.repaint();
+				}else if(lowerHeight) {
+					grid.lowerHeight(x, y);
+					grid.repaint();
 				}else {
 					grid.setColorTypeCoord(x, y, Color.black, SquareType.WALL);
 					grid.repaint();
@@ -119,28 +127,54 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public void setRoot() {
-				if(rootClick) {
-					rootClick = false;
-				}else {
-					rootClick = true;
-					destClick = false;
-				}
+//				if(rootClick) {
+//					rootClick = false;
+//				}else {
+//					rootClick = true;
+//					destClick = false;
+//				}
+				rootClick = true;
+				destClick = false;
+				raiseHeight = false;
+				lowerHeight = false;
 			}
 
 			@Override
 			public void setDestination() {
-				if(destClick) {
-					destClick = false;
-				}else {
-					destClick = true;
-					rootClick = false;
-				}
+//				if(destClick) {
+//					destClick = false;
+//				}else {
+//					destClick = true;
+//					rootClick = false;
+//				}
+				rootClick = false;
+				destClick = true;
+				raiseHeight = false;
+				lowerHeight = false;
 			}
 
 			@Override
 			public void setWall() {
-				destClick = false;
 				rootClick = false;
+				destClick = false;
+				raiseHeight = false;
+				lowerHeight = false;
+			}
+			
+			@Override
+			public void raiseHeight() {
+				rootClick = false;
+				destClick = false;
+				raiseHeight = true;
+				lowerHeight = false;
+			}
+
+			@Override
+			public void lowerHeight() {
+				rootClick = false;
+				destClick = false;
+				raiseHeight = false;
+				lowerHeight = true;
 			}
 
 			@Override
@@ -174,10 +208,9 @@ public class MainFrame extends JFrame {
 						dest = dest.next;
 					}
 				}else {
-					LinearGridSearch lgs = new LinearGridSearch(grid.getRootCoords(), grid.getArray());
-					sortQueue = lgs.getSortOrderQueue();
-					dest = lgs.getDestinationPath();
-					System.out.println("n: "+sortQueue.size());
+					sortQueue = new LinkedList<>();
+					dest = null;
+					System.out.println("No algorithm selected");
 				}
 				
 //				action listener for timer below
@@ -207,7 +240,6 @@ public class MainFrame extends JFrame {
 				timer = new Timer(5, paintListener);
 				timer.start();
 			}
-			
 		});
 		
 //		sets jframe

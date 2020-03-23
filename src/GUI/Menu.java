@@ -84,6 +84,10 @@ public class Menu implements ActionListener{
 		}else if(e.getSource() == startButton) {
 			System.out.println(selectionBox.getSelectedItem());
 			buttonListener.start((String) selectionBox.getSelectedItem());
+		}else if(e.getSource() == raiseButton) {
+			buttonListener.raiseHeight();
+		}else if(e.getSource() == sinkButton) {
+			buttonListener.lowerHeight();
 		}
 	}
 }
