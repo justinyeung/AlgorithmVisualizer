@@ -88,7 +88,7 @@ public class Square {
 		}
 	}
 	public void sinkHeight() {
-		if(height > 0) {
+		if(height > -9) {
 			this.height--;
 		}
 	}

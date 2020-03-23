@@ -113,51 +113,70 @@ public class Grid extends JPanel{
 		this.squareArray = squareArr;
 	}
 	public void raiseHeight(int x, int y) {
-//		add logic to create hills
+//		get surrounding squares to create hill
 		Square current = squareArray[x][y];
 		Square right = current.getRight();
 		Square down = current.getDown();
 		Square left = current.getLeft();
 		Square up = current.getUp();
 		
-		
-		
-
-		
 //		right
 		if(current.getRight() != null && right.getHeight() < current.getHeight()) {
 			raiseHeight(right.getArrCoordX(), right.getArrCoordY());
 		}
 //		down
-		if(current.getDown() != null && down.getHeight() >= 0 && down.getHeight() < current.getHeight()) {
+		if(current.getDown() != null && down.getHeight() < current.getHeight()) {
 			raiseHeight(down.getArrCoordX(), down.getArrCoordY());
 		}
 //		left
-		if(current.getLeft() != null && left.getHeight() >= 0 && left.getHeight() < current.getHeight()) {
+		if(current.getLeft() != null && left.getHeight() < current.getHeight()) {
 			raiseHeight(left.getArrCoordX(), left.getArrCoordY());
 		}
 //		up
-		if(current.getUp() != null && up.getHeight() >= 0 && up.getHeight() < current.getHeight()) {
+		if(current.getUp() != null && up.getHeight() < current.getHeight()) {
 			raiseHeight(up.getArrCoordX(), up.getArrCoordY());
 		}
-
+		
+//		increase current height
 		current.incHeight();
 		
+//		stop recurstion at height 0
 		if(current.getHeight() == 0) {
 			return;
 		}
 	}
 	public void lowerHeight(int x, int y) {
-//		add logic to create hills
-		squareArray[x][y].sinkHeight();
+//		get surrounding squares to create hill
+		Square current = squareArray[x][y];
+		Square right = current.getRight();
+		Square down = current.getDown();
+		Square left = current.getLeft();
+		Square up = current.getUp();
 		
 //		right
-		
+		if(current.getRight() != null && right.getHeight() > current.getHeight()) {
+			lowerHeight(right.getArrCoordX(), right.getArrCoordY());
+		}
 //		down
-		
+		if(current.getDown() != null && down.getHeight() > current.getHeight()) {
+			lowerHeight(down.getArrCoordX(), down.getArrCoordY());
+		}
 //		left
-		
+		if(current.getLeft() != null && left.getHeight() > current.getHeight()) {
+			lowerHeight(left.getArrCoordX(), left.getArrCoordY());
+		}
 //		up
+		if(current.getUp() != null && up.getHeight() > current.getHeight()) {
+			lowerHeight(up.getArrCoordX(), up.getArrCoordY());
+		}
+		
+//		increase current height
+		current.sinkHeight();
+		
+//		stop recurstion at height 0
+		if(current.getHeight() == 0) {
+			return;
+		}
 		
 		
 	}
@@ -182,7 +201,7 @@ public class Grid extends JPanel{
 				g.setColor(Color.black);
 				g.drawRect(x, y, 20, 20);
 //				draw height inside grid
-				g.drawString(current.getHeight().toString(), x+8, y+15);
+				g.drawString(current.getHeight().toString(), x+6, y+15);
 			}
 		}
 	}
