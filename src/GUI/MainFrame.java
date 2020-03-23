@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import java.util.Stack;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import Algorithms.BreadthFirstSearch;
@@ -26,6 +27,7 @@ public class MainFrame extends JFrame {
 	
 	private Grid grid;
 	private Menu menu;
+	private JPanel menupanel;
 	private boolean rootClick;
 	private boolean destClick;
 	private Timer timer;
@@ -33,16 +35,23 @@ public class MainFrame extends JFrame {
 	public MainFrame() {
 		super("Algorithm Visualizer");
 		
-//		type of layout
-		setLayout(new BorderLayout());
-		
 //		initialize components
 		grid = new Grid();
 		menu = new Menu();
 		
-//		add components to JFrame
-		add(grid, BorderLayout.SOUTH);
-		add(menu, BorderLayout.NORTH);
+//		set type of layout for jframe
+		setLayout(new BorderLayout());
+		
+//		set layout and panel for menu buttons
+		menupanel = new JPanel();
+		menupanel.setLayout(new BorderLayout());
+
+//		add grid and menupanel to layout of JFrame
+		add(grid, BorderLayout.PAGE_END);
+		add(menupanel, BorderLayout.PAGE_START);
+		menupanel.add(menu.firstline, BorderLayout.PAGE_START);
+		menupanel.add(menu.secondline, BorderLayout.CENTER);
+		menupanel.add(menu.lastline, BorderLayout.PAGE_END);
 		
 //		mouse listener
 		grid.addMouseListener(new MouseListener() {

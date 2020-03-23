@@ -8,38 +8,53 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
-public class Menu extends JPanel implements ActionListener{
+public class Menu implements ActionListener{
 	
 	private JButton startButton;
 	private JButton resetButton;
 	private JButton wallButton;
 	private JButton rootButton;
 	private JButton destButton;
+	private JButton raiseButton;
+	private JButton sinkButton;
 	private JComboBox<String> selectionBox;
 	private ButtonListener buttonListener;
 	private String[] selections = {
 			"Breadth First Search", 
 			"Depth First Search"};
+	JPanel firstline;
+	JPanel secondline;
+	JPanel lastline;
 	
 	public Menu(){
 //		init components
-		startButton = new JButton("Start");
-		resetButton = new JButton("Reset");
 		wallButton = new JButton("Wall");
 		rootButton = new JButton("Root");
 		destButton = new JButton("Destination");
 		selectionBox = new JComboBox<String>(selections);
+		startButton = new JButton("Start");
+		resetButton = new JButton("Reset");
+		raiseButton = new JButton("Raise Height");
+		sinkButton = new JButton("Lower Height");
+		
+		firstline = new JPanel();
+		secondline = new JPanel();
+		lastline = new JPanel();
 		
 //		set layout
-		setLayout(new FlowLayout());
+		firstline.setLayout(new FlowLayout());
+		secondline.setLayout(new FlowLayout());
+		lastline.setLayout(new FlowLayout());
 		
 //		add to menu
-		add(wallButton);
-		add(rootButton);
-		add(destButton);
-		add(selectionBox);
-		add(resetButton);
-		add(startButton);
+		firstline.add(wallButton);
+		firstline.add(rootButton);
+		firstline.add(destButton);
+		secondline.add(raiseButton);
+		secondline.add(sinkButton);
+		lastline.add(selectionBox);
+		lastline.add(resetButton);
+		lastline.add(startButton);
 		
 //		action listeners
 		startButton.addActionListener(this);
@@ -47,6 +62,8 @@ public class Menu extends JPanel implements ActionListener{
 		wallButton.addActionListener(this);
 		rootButton.addActionListener(this);
 		destButton.addActionListener(this);
+		raiseButton.addActionListener(this);
+		sinkButton.addActionListener(this);
 	}
 	
 	public void setButtonListener(ButtonListener listener) {
