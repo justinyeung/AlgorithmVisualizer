@@ -9,9 +9,14 @@ public abstract class Search {
 	
 	protected CanvasCoords root;
 	protected boolean[][] visitedArray;
+	protected Square[][] squareArray;
 	protected LinkedList<CanvasCoords> sortOrderQueue;
 	protected Node[][] previousNodes;
 	protected Node destinationPath;
+	
+	protected final int numI = 63;
+	protected final int numJ = 25;
+	
 	public class Node{
 		public CanvasCoords item;
 		public Node next;
@@ -19,11 +24,12 @@ public abstract class Search {
 	
 	public Search(CanvasCoords root, Square[][] squareArray) {
 		this.root = root;
-		this.visitedArray = new boolean[63][25];
+		this.squareArray = squareArray;
+		this.visitedArray = new boolean[numI][numJ];
 		sortOrderQueue = new LinkedList<>();
-		previousNodes = new Node[63][25];
-		for(int i = 0; i < 63; i++) {
-			for(int j = 0; j < 25; j++) {
+		previousNodes = new Node[numI][numJ];
+		for(int i = 0; i < numI; i++) {
+			for(int j = 0; j < numJ; j++) {
 				previousNodes[i][j] = new Node();
 			}
 		}
@@ -45,5 +51,7 @@ public abstract class Search {
 //		convert from canvas coords to array coords
 		return visitedArray[square.getArrCoordX()][square.getArrCoordY()];
 	}
+	
+	public abstract CanvasCoords search();
 	
 }

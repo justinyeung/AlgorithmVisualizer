@@ -9,17 +9,15 @@ import Model.SquareType;
 public class DepthFirstSearch extends Search{
 	
 	private Stack<Square> stack;
-	private Square[][] squareArray;
 	
 	public DepthFirstSearch(CanvasCoords root, Square[][] squareArray) {
 		super(root, squareArray);
 		stack = new Stack<Square>();
-		this.squareArray = squareArray;
 		CanvasCoords result = search();
 		System.out.println(result.getArrayX() + ", " + result.getArrayY());
 	}
 
-	
+	@Override
 	public CanvasCoords search() {
 		
 		Square current;

@@ -21,7 +21,8 @@ public class Menu implements ActionListener{
 	private ButtonListener buttonListener;
 	private String[] selections = {
 			"Breadth First Search", 
-			"Depth First Search"};
+			"Depth First Search", 
+			"Dijkstra's Shortest Path Algorithm"};
 	JPanel firstline;
 	JPanel secondline;
 	JPanel lastline;
