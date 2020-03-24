@@ -24,7 +24,7 @@ public class DepthFirstSearch extends Search{
 		
 //		push root to stack
 		stack.push(this.squareArray[this.root.getArrayX()][this.root.getArrayY()]);
-		previousNodes[root.getArrayX()][root.getArrayY()].item = new CanvasCoords(root.getX(), root.getY());
+		previousNodes[root.getArrayX()][root.getArrayY()].item = root;
 		
 //		dfs iteratively
 		while(!stack.empty()) {

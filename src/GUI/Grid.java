@@ -178,8 +178,6 @@ public class Grid extends JPanel{
 		if(current.getHeight() == 0) {
 			return;
 		}
-		
-		
 	}
 	
 	public void paint(Graphics g) {

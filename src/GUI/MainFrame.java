@@ -187,6 +187,7 @@ public class MainFrame extends JFrame {
 				}else if(algorithm == "Dijkstra's Shortest Path Algorithm") {
 					DijkstrasAlgorithm djk = new DijkstrasAlgorithm(grid.getRootCoords(), grid.getArray());
 					sortQueue = djk.getSortOrderQueue();
+					System.out.println("n: "+sortQueue.size());
 					dest = djk.getDestinationPath();
 				}else {
 					sortQueue = new LinkedList<>();
