@@ -9,24 +9,22 @@ import Model.SquareType;
 public class DepthFirstSearch extends Search{
 	
 	private Stack<Square> stack;
-	private Square[][] squareArray;
 	
 	public DepthFirstSearch(CanvasCoords root, Square[][] squareArray) {
 		super(root, squareArray);
 		stack = new Stack<Square>();
-		this.squareArray = squareArray;
 		CanvasCoords result = search();
 		System.out.println(result.getArrayX() + ", " + result.getArrayY());
 	}
 
-	
+	@Override
 	public CanvasCoords search() {
 		
 		Square current;
 		
 //		push root to stack
 		stack.push(this.squareArray[this.root.getArrayX()][this.root.getArrayY()]);
-		previousNodes[root.getArrayX()][root.getArrayY()].item = new CanvasCoords(root.getX(), root.getY());
+		previousNodes[root.getArrayX()][root.getArrayY()].item = root;
 		
 //		dfs iteratively
 		while(!stack.empty()) {

@@ -19,7 +19,7 @@ public class Square {
 		this.coord = new CanvasCoords(xcoord, ycoord);
 		this.setColor(color);
 		this.type = type;
-		this.height = 0;
+		this.height = 1;
 	}
 
 //	getters
@@ -80,7 +80,7 @@ public class Square {
 		this.type = type;
 	}
 	public void resetHeight() {
-		this.height = 0;
+		this.height = 1;
 	}
 	public void incHeight() {
 		if(height < 9) {

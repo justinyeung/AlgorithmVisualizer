@@ -11,12 +11,13 @@ import Model.Square;
 import Model.SquareType;
 
 import java.awt.Graphics;
-import java.util.ArrayList;
 
 public class Grid extends JPanel{
 	
 	private Square[][] squareArray; // array coords
 	private CanvasCoords currentRoot; // canvas coords
+	protected final int numI = 63; // length and width of grid
+	protected final int numJ = 25;
 	
 	private Font font = new Font("Arial", Font.BOLD, 14);
 //	TODO: turn destArray to canvas coords
@@ -31,9 +32,9 @@ public class Grid extends JPanel{
 //		destArray = new ArrayList<>();
 		
 //		initialize squares
-		squareArray = new Square[63][25];
-		for(int i = 0; i < 63; i++) {
-			for(int j = 0; j < 25; j++) {
+		squareArray = new Square[numI][numJ];
+		for(int i = 0; i < numI; i++) {
+			for(int j = 0; j < numJ; j++) {
 				squareArray[i][j] = new Square(count, i * 20, j * 20, Color.white, SquareType.SAFE);
 				count++;
 			}
@@ -51,18 +52,18 @@ public class Grid extends JPanel{
 		
 		
 //		initialize square links
-		for(int i = 0; i < 63; i++) {
-			for(int j = 0; j < 25; j++) {
+		for(int i = 0; i < numI; i++) {
+			for(int j = 0; j < numJ; j++) {
 				if(i > 0) {
 					squareArray[i][j].setLeft(squareArray[i - 1][j]);
 				}
-				if(i < 62) {
+				if(i < numI - 1) {
 					squareArray[i][j].setRight(squareArray[i + 1][j]);
 				}
 				if(j > 0) {
 					squareArray[i][j].setUp(squareArray[i][j - 1]);
 				}
-				if(j < 24) {
+				if(j < numJ-1) {
 					squareArray[i][j].setDown(squareArray[i][j + 1]);
 				}
 			}
@@ -177,8 +178,6 @@ public class Grid extends JPanel{
 		if(current.getHeight() == 0) {
 			return;
 		}
-		
-		
 	}
 	
 	public void paint(Graphics g) {
@@ -188,8 +187,8 @@ public class Grid extends JPanel{
 		int x;
 		int y;
 		Color color;
-		for(int i = 0; i < 63; i++) {
-			for(int j = 0; j < 25; j++) {
+		for(int i = 0; i < numI; i++) {
+			for(int j = 0; j < numJ; j++) {
 				Square current = squareArray[i][j];
 				x = current.getXcoord(); // canvas coords
 				y = current.getYcoord();

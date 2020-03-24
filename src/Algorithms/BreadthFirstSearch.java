@@ -9,23 +9,22 @@ import Model.SquareType;
 public class BreadthFirstSearch extends Search{
 
 	private LinkedList<Square> queue;
-	private Square[][] squareArray;
 	
 	public BreadthFirstSearch(CanvasCoords root, Square[][] squareArray) {
 		super(root, squareArray);
 		queue = new LinkedList<Square>();
-		this.squareArray = squareArray;
 		CanvasCoords result = search();
 		System.out.println(result.getArrayX() + ", " + result.getArrayY());
 	}
 	
+	@Override
 	public CanvasCoords search() {
 		
 		Square current;
 		
 //		enqueue root to queue
 		queue.add(this.squareArray[this.root.getArrayX()][this.root.getArrayY()]);
-		previousNodes[root.getArrayX()][root.getArrayY()].item = new CanvasCoords(root.getX(), root.getY());
+		previousNodes[root.getArrayX()][root.getArrayY()].item = root;
 		visitedArray[root.getArrayX()][root.getArrayY()] = true;
 		
 //		bfs iteratively

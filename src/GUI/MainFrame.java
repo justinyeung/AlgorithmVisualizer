@@ -16,6 +16,7 @@ import javax.swing.Timer;
 
 import Algorithms.BreadthFirstSearch;
 import Algorithms.DepthFirstSearch;
+import Algorithms.DijkstrasAlgorithm;
 import Algorithms.Search.Node;
 import Model.CanvasCoords;
 import Model.SquareType;
@@ -106,8 +107,8 @@ public class MainFrame extends JFrame {
 		menu.setButtonListener(new ButtonListener() {
 			@Override
 			public void reset() {
-				for(int i = 0; i < 63; i++) {
-					for(int j = 0; j < 25; j++) {
+				for(int i = 0; i < grid.numI; i++) {
+					for(int j = 0; j < grid.numJ; j++) {
 						if(grid.getType(i, j) != SquareType.SAFE) {
 							grid.setColorTypeCoord(i, j, Color.white, SquareType.SAFE);
 						}
@@ -177,25 +178,29 @@ public class MainFrame extends JFrame {
 					BreadthFirstSearch bfs = new BreadthFirstSearch(grid.getRootCoords(), grid.getArray());
 					sortQueue = bfs.getSortOrderQueue();
 					System.out.println("n: "+sortQueue.size());
-					
-//					iterate through shortest path to add to queue for printing
 					dest = bfs.getDestinationPath();
 				}else if(algorithm == "Depth First Search") {
 					DepthFirstSearch dfs = new DepthFirstSearch(grid.getRootCoords(), grid.getArray());
 					sortQueue = dfs.getSortOrderQueue();
 					System.out.println("n: "+sortQueue.size());
-					
-//					iterate through shortest path to add to queue for printing
 					dest = dfs.getDestinationPath();
+				}else if(algorithm == "Dijkstra's Shortest Path Algorithm") {
+					DijkstrasAlgorithm djk = new DijkstrasAlgorithm(grid.getRootCoords(), grid.getArray());
+					sortQueue = djk.getSortOrderQueue();
+					System.out.println("n: "+sortQueue.size());
+					dest = djk.getDestinationPath();
 				}else {
 					sortQueue = new LinkedList<>();
 					dest = null;
 					System.out.println("No algorithm selected");
 				}
+				
+//				iterate through shortest path to add to queue for printing
 				while(dest != null) {
 					pathList.add(dest.item);
 					dest = dest.next;
 				}
+				
 //				action listener for timer below
 				ActionListener paintListener = new ActionListener() {
 					@Override
