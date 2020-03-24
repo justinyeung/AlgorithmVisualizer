@@ -20,5 +20,5 @@
 <li>Animation outlining how selected algorithm will work</li>
 <li>Grey squares showing the squares that the algorithm checked</li>
 <li>Yellow path showing the path the algorithm took to find destination</li>
-
-Created using Java with Swing GUI
+<br>
+<b>Created using Java with Swing GUI</b>
