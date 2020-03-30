@@ -17,6 +17,7 @@ public class Menu implements ActionListener{
 	private JButton destButton;
 	private JButton raiseButton;
 	private JButton sinkButton;
+	private JButton eraserButton;
 	private JComboBox<String> selectionBox;
 	private ButtonListener buttonListener;
 	private String[] selections = {
@@ -26,12 +27,14 @@ public class Menu implements ActionListener{
 	JPanel firstline;
 	JPanel secondline;
 	JPanel lastline;
+	private boolean animationRunning;
 	
 	public Menu(){
 //		init components
 		wallButton = new JButton("Wall");
 		rootButton = new JButton("Root");
 		destButton = new JButton("Destination");
+		eraserButton = new JButton("Eraser");
 		selectionBox = new JComboBox<String>(selections);
 		startButton = new JButton("Start");
 		resetButton = new JButton("Reset");
@@ -51,6 +54,7 @@ public class Menu implements ActionListener{
 		firstline.add(wallButton);
 		firstline.add(rootButton);
 		firstline.add(destButton);
+		firstline.add(eraserButton);
 		secondline.add(raiseButton);
 		secondline.add(sinkButton);
 		lastline.add(selectionBox);
@@ -63,6 +67,7 @@ public class Menu implements ActionListener{
 		wallButton.addActionListener(this);
 		rootButton.addActionListener(this);
 		destButton.addActionListener(this);
+		eraserButton.addActionListener(this);
 		raiseButton.addActionListener(this);
 		sinkButton.addActionListener(this);
 	}
@@ -74,19 +79,20 @@ public class Menu implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 //		enable all buttons
-		startButton.setEnabled(true);
 		resetButton.setEnabled(true);
 		wallButton.setEnabled(true);
 		rootButton.setEnabled(true);
 		destButton.setEnabled(true);
 		raiseButton.setEnabled(true);
 		sinkButton.setEnabled(true);
+		eraserButton.setEnabled(true);
+		
 //		action listeners for jcomponents
 //		run methods in grid
 //		disable buttons
-		
 		if(e.getSource() == resetButton) {
 			buttonListener.reset();
+			startButton.setEnabled(true);
 		}else if(e.getSource() == rootButton) {
 			buttonListener.setRoot();
 			rootButton.setEnabled(false);
@@ -106,6 +112,9 @@ public class Menu implements ActionListener{
 		}else if(e.getSource() == sinkButton) {
 			buttonListener.lowerHeight();
 			sinkButton.setEnabled(false);
+		}else if(e.getSource() == eraserButton) {
+			buttonListener.erase();
+			eraserButton.setEnabled(false);
 		}
 	}
 }
