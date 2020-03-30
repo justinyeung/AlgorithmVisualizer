@@ -1,4 +1,4 @@
-# Grid Pathfinding Algorithm Visualizer
+# Grid/Contour Map Pathfinding Algorithm Visualizer
 
 <p> <b>Visualize the most famous graph search/traversal algorithms on a grid</b></p>
 <p> <b>FInd the shortest path from a starting point to ending point</b></p>
