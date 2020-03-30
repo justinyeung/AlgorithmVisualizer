@@ -176,6 +176,8 @@ public class MainFrame extends JFrame {
 				Stack<CanvasCoords> pathList = new Stack<>();
 				Node dest;
 				
+				resetClicked = false;
+				
 //				conditional statement for which algorithm to use
 				if(algorithm == "Breadth First Search") {
 //					get sortorderqueue from bfs
