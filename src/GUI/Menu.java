@@ -86,6 +86,7 @@ public class Menu implements ActionListener{
 		raiseButton.setEnabled(true);
 		sinkButton.setEnabled(true);
 		eraserButton.setEnabled(true);
+		selectionBox.setEnabled(true);
 		
 //		action listeners for jcomponents
 //		run methods in grid
@@ -105,7 +106,15 @@ public class Menu implements ActionListener{
 		}else if(e.getSource() == startButton) {
 			System.out.println(selectionBox.getSelectedItem());
 			buttonListener.start((String) selectionBox.getSelectedItem());
+//			disable all buttons except reset
 			startButton.setEnabled(false);
+			wallButton.setEnabled(false);
+			rootButton.setEnabled(false);
+			destButton.setEnabled(false);
+			raiseButton.setEnabled(false);
+			sinkButton.setEnabled(false);
+			eraserButton.setEnabled(false);
+			selectionBox.setEnabled(false);
 		}else if(e.getSource() == raiseButton) {
 			buttonListener.raiseHeight();
 			raiseButton.setEnabled(false);

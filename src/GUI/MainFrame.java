@@ -36,7 +36,7 @@ public class MainFrame extends JFrame {
 	private boolean erase;
 	private Timer timer;
 	private boolean resetClicked = false;
-	private boolean animationRunning = false;
+//	private boolean animationRunning = false;
 	
 	public MainFrame() {
 		super("Algorithm Visualizer");
@@ -116,80 +116,69 @@ public class MainFrame extends JFrame {
 		menu.setButtonListener(new ButtonListener() {
 			@Override
 			public void setRoot() {
-				if(!animationRunning) {
-					wallClick = false;
-					rootClick = true;
-					destClick = false;
-					raiseHeight = false;
-					lowerHeight = false;
-					erase = false;
-				}
+				wallClick = false;
+				rootClick = true;
+				destClick = false;
+				raiseHeight = false;
+				lowerHeight = false;
+				erase = false;
 			}
 
 			@Override
 			public void setDestination() {
-				if(!animationRunning) {
-					wallClick = false;
-					rootClick = false;
-					destClick = true;
-					raiseHeight = false;
-					lowerHeight = false;
-					erase = false;
-				}
+				wallClick = false;
+				rootClick = false;
+				destClick = true;
+				raiseHeight = false;
+				lowerHeight = false;
+				erase = false;
 			}
 
 			@Override
 			public void setWall() {
-				if(!animationRunning) {
-					wallClick = true;
-					rootClick = false;
-					destClick = false;
-					raiseHeight = false;
-					lowerHeight = false;
-					erase = false;
-				}
+				wallClick = true;
+				rootClick = false;
+				destClick = false;
+				raiseHeight = false;
+				lowerHeight = false;
+				erase = false;
 			}
 			
 			@Override
 			public void raiseHeight() {
-				if(!animationRunning) {
-					wallClick = false;
-					rootClick = false;
-					destClick = false;
-					raiseHeight = true;
-					lowerHeight = false;
-					erase = false;
-				}
+				wallClick = false;
+				rootClick = false;
+				destClick = false;
+				raiseHeight = true;
+				lowerHeight = false;
+				erase = false;
 			}
 
 			@Override
 			public void lowerHeight() {
-				if(!animationRunning) {
-					wallClick = false;
-					rootClick = false;
-					destClick = false;
-					raiseHeight = false;
-					lowerHeight = true;
-					erase = false;
-				}
+				wallClick = false;
+				rootClick = false;
+				destClick = false;
+				raiseHeight = false;
+				lowerHeight = true;
+				erase = false;
 			}
 			
 			@Override
 			public void erase() {
-				if(!animationRunning) {
-					wallClick = false;
-					rootClick = false;
-					destClick = false;
-					raiseHeight = false;
-					lowerHeight = false;
-					erase = true;
-				}
+				wallClick = false;
+				rootClick = false;
+				destClick = false;
+				raiseHeight = false;
+				lowerHeight = false;
+				erase = true;
 			}
 
 			@Override
 			public void reset() {
 //				stop any animations
 				resetClicked = true;
+//				animationRunning = false;
 				
 				for(int i = 0; i < grid.numI; i++) {
 					for(int j = 0; j < grid.numJ; j++) {
@@ -217,8 +206,8 @@ public class MainFrame extends JFrame {
 				
 //				reset the boolean that disabled animations
 //				disable all button functionalities
-				resetClicked = false;
-				animationRunning = true;
+				resetClicked = false; //true when reset clicked during animation
+//				animationRunning = true; //true when animation is running
 				wallClick = false;
 				rootClick = false;
 				destClick = false;
@@ -264,7 +253,7 @@ public class MainFrame extends JFrame {
 //							if reset is clicked, stop animation
 							timer.stop();
 							resetClicked = false;
-							animationRunning = false;
+//							animationRunning = false;
 						}else if(!sortQueue.isEmpty()) {
 							CanvasCoords head = sortQueue.remove();
 							int x = head.getArrayX();
@@ -279,7 +268,7 @@ public class MainFrame extends JFrame {
 							grid.repaint();
 						}else {
 							timer.stop();
-							animationRunning = false;
+//							animationRunning = false;
 						}
 					}
 				};
