@@ -68,8 +68,6 @@ public class DepthFirstSearch extends Search{
 				stack.pop();
 			}
 		}
-		
-		
 		return new CanvasCoords(-1, -1);
 	}
 

@@ -29,8 +29,8 @@ public class DijkstrasAlgorithm extends Search{
 		CanvasCoords minCoord = new CanvasCoords(-1, -1);
 		
 //		loop through entire grid (squareArray)
-		for(int i = 0; i < 63; i++) {
-			for(int j = 0; j < 25; j++) {
+		for(int i = 0; i < numI; i++) {
+			for(int j = 0; j < numJ; j++) {
 				if(visitedArray[i][j] == false && distances[i][j] <= min) {
 					min = distances[i][j];
 					minCoord = new CanvasCoords(i*20, j*20);
@@ -61,7 +61,7 @@ public class DijkstrasAlgorithm extends Search{
 //			returns CanvasCoords of new current square
 			current = nextMinDist(); // canvas coord
 			
-//			check if current is destination
+//			check if current is destination, set destinationpath node
 			if(squareArray[current.getArrayX()][current.getArrayY()].getType() == SquareType.DESTINATION) {
 				destinationPath = previousNodes[current.getArrayX()][current.getArrayY()];
 				return current;
@@ -80,6 +80,7 @@ public class DijkstrasAlgorithm extends Search{
 //			update distance values for adjacent squares (from adjacent node to root)
 //			update if not visited, 
 //			sets distance if current dist + adjacent height < adjacent dist
+//			connect adjacent previousNodes linkedlist to current previousNodes linkedlist
 			if(right != null && right.getType() != SquareType.WALL && !isVisited(right) && getDist(current) + right.getHeight() < getDist(right)) {
 				distances[right.getArrCoordX()][right.getArrCoordY()] = getDist(current) + right.getHeight();
 				previousNodes[right.getArrCoordX()][right.getArrCoordY()].item = new CanvasCoords(right.getXcoord(), right.getYcoord());
@@ -100,7 +101,6 @@ public class DijkstrasAlgorithm extends Search{
 				previousNodes[up.getArrCoordX()][up.getArrCoordY()].item = new CanvasCoords(up.getXcoord(), up.getYcoord());
 				previousNodes[up.getArrCoordX()][up.getArrCoordY()].next = previousNodes[current.getArrayX()][current.getArrayY()];
 			}
-			
 		}
 		return new CanvasCoords(-1, -1);
 	}
