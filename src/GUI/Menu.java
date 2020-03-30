@@ -73,22 +73,39 @@ public class Menu implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+//		enable all buttons
+		startButton.setEnabled(true);
+		resetButton.setEnabled(true);
+		wallButton.setEnabled(true);
+		rootButton.setEnabled(true);
+		destButton.setEnabled(true);
+		raiseButton.setEnabled(true);
+		sinkButton.setEnabled(true);
 //		action listeners for jcomponents
+//		run methods in grid
+//		disable buttons
+		
 		if(e.getSource() == resetButton) {
 			buttonListener.reset();
 		}else if(e.getSource() == rootButton) {
 			buttonListener.setRoot();
+			rootButton.setEnabled(false);
 		}else if(e.getSource() == destButton) {
 			buttonListener.setDestination();
+			destButton.setEnabled(false);
 		}else if(e.getSource() == wallButton) {
 			buttonListener.setWall();
+			wallButton.setEnabled(false);
 		}else if(e.getSource() == startButton) {
 			System.out.println(selectionBox.getSelectedItem());
 			buttonListener.start((String) selectionBox.getSelectedItem());
+			startButton.setEnabled(false);
 		}else if(e.getSource() == raiseButton) {
 			buttonListener.raiseHeight();
+			raiseButton.setEnabled(false);
 		}else if(e.getSource() == sinkButton) {
 			buttonListener.lowerHeight();
+			sinkButton.setEnabled(false);
 		}
 	}
 }

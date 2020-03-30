@@ -33,6 +33,7 @@ public class MainFrame extends JFrame {
 	private boolean raiseHeight;
 	private boolean lowerHeight;
 	private Timer timer;
+	private boolean resetClicked;
 	
 	public MainFrame() {
 		super("Algorithm Visualizer");
@@ -105,26 +106,6 @@ public class MainFrame extends JFrame {
 		
 //		menu button functions (called from menu)
 		menu.setButtonListener(new ButtonListener() {
-			@Override
-			public void reset() {
-				for(int i = 0; i < grid.numI; i++) {
-					for(int j = 0; j < grid.numJ; j++) {
-						if(grid.getType(i, j) != SquareType.SAFE) {
-							grid.setColorTypeCoord(i, j, Color.white, SquareType.SAFE);
-						}
-						grid.resetHeight(i, j);
-					}
-				}
-//				reset default root
-				grid.setColorTypeCoord(20, 12, Color.red, SquareType.ROOT);
-				grid.setRootCoords(20*20, 12*20);
-				
-//				initialize default destination
-				grid.setColorTypeCoord(43, 12, Color.blue, SquareType.DESTINATION);
-				
-				
-				grid.repaint();
-			}
 
 			@Override
 			public void setRoot() {
@@ -167,6 +148,29 @@ public class MainFrame extends JFrame {
 			}
 
 			@Override
+			public void reset() {
+//				stop any animations
+				resetClicked = true;
+				
+				for(int i = 0; i < grid.numI; i++) {
+					for(int j = 0; j < grid.numJ; j++) {
+						if(grid.getType(i, j) != SquareType.SAFE) {
+							grid.setColorTypeCoord(i, j, Color.white, SquareType.SAFE);
+						}
+						grid.resetHeight(i, j);
+					}
+				}
+//				reset default root
+				grid.setColorTypeCoord(20, 12, Color.red, SquareType.ROOT);
+				grid.setRootCoords(20*20, 12*20);
+				
+//				initialize default destination
+				grid.setColorTypeCoord(43, 12, Color.blue, SquareType.DESTINATION);
+				
+				grid.repaint();
+			}
+			
+			@Override
 			public void start(String algorithm) {
 				LinkedList<CanvasCoords> sortQueue;
 				Stack<CanvasCoords> pathList = new Stack<>();
@@ -206,7 +210,11 @@ public class MainFrame extends JFrame {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 //						paint coordinates yellow from print order queue
-						if(!sortQueue.isEmpty()) {
+						if(resetClicked) {
+//							if reset is clicked, stop animation
+							timer.stop();
+							resetClicked = false;
+						}else if(!sortQueue.isEmpty()) {
 							CanvasCoords head = sortQueue.remove();
 							int x = head.getArrayX();
 							int y = head.getArrayY();
