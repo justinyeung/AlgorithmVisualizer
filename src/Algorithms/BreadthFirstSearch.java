@@ -76,7 +76,6 @@ public class BreadthFirstSearch extends Search{
 				previousNodes[up.getArrCoordX()][up.getArrCoordY()].next = previousNodes[current.getArrCoordX()][current.getArrCoordY()];
 			}
 		}
-		
 		return new CanvasCoords(-1, -1);
 	}
 	
