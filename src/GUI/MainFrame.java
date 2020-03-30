@@ -28,11 +28,15 @@ public class MainFrame extends JFrame {
 	private Grid grid;
 	private Menu menu;
 	private JPanel menupanel;
+	private boolean wallClick;
 	private boolean rootClick;
 	private boolean destClick;
 	private boolean raiseHeight;
 	private boolean lowerHeight;
+	private boolean erase;
 	private Timer timer;
+	private boolean resetClicked = false;
+//	private boolean animationRunning = false;
 	
 	public MainFrame() {
 		super("Algorithm Visualizer");
@@ -82,6 +86,9 @@ public class MainFrame extends JFrame {
 					grid.repaint();
 //					change root canvas coords
 					grid.setRootCoords(e.getX(), e.getY());
+				}else if(wallClick) {
+					grid.setColorTypeCoord(x, y, Color.black, SquareType.WALL);
+					grid.repaint();
 				}else if(destClick){
 //					paint on to grid
 					grid.setColorTypeCoord(x, y, Color.blue, SquareType.DESTINATION);
@@ -94,9 +101,11 @@ public class MainFrame extends JFrame {
 				}else if(lowerHeight) {
 					grid.lowerHeight(x, y);
 					grid.repaint();
-				}else {
-					grid.setColorTypeCoord(x, y, Color.black, SquareType.WALL);
-					grid.repaint();
+				}else if(erase) {
+					if(grid.getType(x, y) != SquareType.ROOT) {
+						grid.setColorTypeCoord(x, y, Color.white, SquareType.SAFE);
+						grid.repaint();
+					}
 				}
 			}
 			@Override
@@ -106,7 +115,71 @@ public class MainFrame extends JFrame {
 //		menu button functions (called from menu)
 		menu.setButtonListener(new ButtonListener() {
 			@Override
+			public void setRoot() {
+				wallClick = false;
+				rootClick = true;
+				destClick = false;
+				raiseHeight = false;
+				lowerHeight = false;
+				erase = false;
+			}
+
+			@Override
+			public void setDestination() {
+				wallClick = false;
+				rootClick = false;
+				destClick = true;
+				raiseHeight = false;
+				lowerHeight = false;
+				erase = false;
+			}
+
+			@Override
+			public void setWall() {
+				wallClick = true;
+				rootClick = false;
+				destClick = false;
+				raiseHeight = false;
+				lowerHeight = false;
+				erase = false;
+			}
+			
+			@Override
+			public void raiseHeight() {
+				wallClick = false;
+				rootClick = false;
+				destClick = false;
+				raiseHeight = true;
+				lowerHeight = false;
+				erase = false;
+			}
+
+			@Override
+			public void lowerHeight() {
+				wallClick = false;
+				rootClick = false;
+				destClick = false;
+				raiseHeight = false;
+				lowerHeight = true;
+				erase = false;
+			}
+			
+			@Override
+			public void erase() {
+				wallClick = false;
+				rootClick = false;
+				destClick = false;
+				raiseHeight = false;
+				lowerHeight = false;
+				erase = true;
+			}
+
+			@Override
 			public void reset() {
+//				stop any animations
+				resetClicked = true;
+//				animationRunning = false;
+				
 				for(int i = 0; i < grid.numI; i++) {
 					for(int j = 0; j < grid.numJ; j++) {
 						if(grid.getType(i, j) != SquareType.SAFE) {
@@ -122,55 +195,25 @@ public class MainFrame extends JFrame {
 //				initialize default destination
 				grid.setColorTypeCoord(43, 12, Color.blue, SquareType.DESTINATION);
 				
-				
 				grid.repaint();
 			}
-
-			@Override
-			public void setRoot() {
-				rootClick = true;
-				destClick = false;
-				raiseHeight = false;
-				lowerHeight = false;
-			}
-
-			@Override
-			public void setDestination() {
-				rootClick = false;
-				destClick = true;
-				raiseHeight = false;
-				lowerHeight = false;
-			}
-
-			@Override
-			public void setWall() {
-				rootClick = false;
-				destClick = false;
-				raiseHeight = false;
-				lowerHeight = false;
-			}
 			
-			@Override
-			public void raiseHeight() {
-				rootClick = false;
-				destClick = false;
-				raiseHeight = true;
-				lowerHeight = false;
-			}
-
-			@Override
-			public void lowerHeight() {
-				rootClick = false;
-				destClick = false;
-				raiseHeight = false;
-				lowerHeight = true;
-			}
-
 			@Override
 			public void start(String algorithm) {
 				LinkedList<CanvasCoords> sortQueue;
 				Stack<CanvasCoords> pathList = new Stack<>();
 				Node dest;
+				
+//				reset the boolean that disabled animations
+//				disable all button functionalities
+				resetClicked = false; //true when reset clicked during animation
+//				animationRunning = true; //true when animation is running
+				wallClick = false;
+				rootClick = false;
+				destClick = false;
+				raiseHeight = false;
+				lowerHeight = false;
+				erase = false;
 				
 //				conditional statement for which algorithm to use
 				if(algorithm == "Breadth First Search") {
@@ -206,7 +249,12 @@ public class MainFrame extends JFrame {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 //						paint coordinates yellow from print order queue
-						if(!sortQueue.isEmpty()) {
+						if(resetClicked) {
+//							if reset is clicked, stop animation
+							timer.stop();
+							resetClicked = false;
+//							animationRunning = false;
+						}else if(!sortQueue.isEmpty()) {
 							CanvasCoords head = sortQueue.remove();
 							int x = head.getArrayX();
 							int y = head.getArrayY();
@@ -220,6 +268,7 @@ public class MainFrame extends JFrame {
 							grid.repaint();
 						}else {
 							timer.stop();
+//							animationRunning = false;
 						}
 					}
 				};
