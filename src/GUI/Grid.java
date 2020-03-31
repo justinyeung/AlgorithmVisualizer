@@ -19,7 +19,7 @@ public class Grid extends JPanel{
 	protected final int numI = 63; // length and width of grid
 	protected final int numJ = 25;
 	
-	private Font font = new Font("Arial", Font.BOLD, 14);
+	private Font font = new Font("Arial", Font.BOLD, 12);
 //	TODO: turn destArray to canvas coords
 //	private ArrayList<CanvasCoords> destArray; // array coords
 	
@@ -208,7 +208,15 @@ public class Grid extends JPanel{
 				g.setColor(Color.black);
 				g.drawRect(x, y, 20, 20);
 //				draw height inside grid
-				g.drawString(current.getHeight().toString(), x+6, y+15);
+				Integer height = current.getHeight();
+				if(height >= 0 && height <= 9) {
+					g.drawString(current.getHeight().toString(), x+7, y+15);
+				}else if(height >= -9){
+					g.drawString(current.getHeight().toString(), x+4, y+15);
+				}else {
+					g.drawString(current.getHeight().toString(), x+2, y+15);
+				}
+				
 			}
 		}
 	}
