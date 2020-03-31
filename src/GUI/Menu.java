@@ -44,7 +44,7 @@ public class Menu implements ActionListener{
 		sinkHillButton = new JButton("Lower Hill");
 		raiseButton = new JButton("Raise Height");
 		sinkButton = new JButton("Lower Height");
-		eraseHeightButton = new JButton("Remove Height");
+		eraseHeightButton = new JButton("Erase Height");
 		
 //		initialize JPanels
 		firstline = new JPanel();
