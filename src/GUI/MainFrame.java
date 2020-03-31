@@ -325,7 +325,7 @@ public class MainFrame extends JFrame {
 		
 //		sets jframe
 		setVisible(true);
-		setSize(1400,800);
+		setSize(1405,800);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}
