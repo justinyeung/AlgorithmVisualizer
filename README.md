@@ -1,12 +1,18 @@
 # Contour Map Pathfinding and Searching Algorithm Visualizer
 
 <p> <b>Visualize the most famous graph search/traversal algorithms on a grid with height values</b></p>
-<p> <b>Find the shortest path from a starting point to ending point</b></p>
+<p> <b>Find the shortest path from a starting point to ending point with respect to distance and height</b></p>
 
 <h3>Visualization of Algorithms:</h3>
 <li>Depth First Search</li>
 <li>Breadth First Search</li>
 <li>Dijkstra's shortest path algorithm</li>
+<b>NOTE: </b>
+<ul>
+  <li>DFS and BFS are unweighted so heights of squares are ignored</li>
+  <li>Dijkstra's Algorithm ignores negative weights so height of square <1 are ignored</li>
+  </ul>
+</li>
 
 <h3>Instructions to run</h3>
 <li>Clone this repository (git clone repo-link)</li>
