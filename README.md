@@ -8,9 +8,14 @@
 <li>Breadth First Search</li>
 <li>Dijkstra's shortest path algorithm</li>
 
-<h3>Instructions to run:</h3>
-<li>Clone this repository</li>
-<li>Run the file 'app.java' in the 'src' folder</li>
+<h3>Instructions to run</h3>
+<li>Clone this repository (git clone repo-link)</li>
+<li>Navigate to folder with cloned repo</li>
+<li>Open file 'AlgorithmVisualizer.jar' (java -jar AlgorithmVisualizer.jar)</li>
+
+<h3>Instructions to develop:</h3>
+<li>Clone this repository (git clone repo-link)</li>
+<li>Open cloned repo in Eclipse (File -> Open projects from file system)</li>
 
 <h3>Tutorial:</h3>
 <li>Click on 'Wall' button then select anywhere on the grid to create barriers for search</li>
