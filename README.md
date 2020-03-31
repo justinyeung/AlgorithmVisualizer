@@ -1,7 +1,7 @@
 # Contour Map Pathfinding and Searching Algorithm Visualizer
 
-<p> <b>Visualize the most famous graph search/traversal algorithms on a grid</b></p>
-<p> <b>FInd the shortest path from a starting point to ending point</b></p>
+<p> <b>Visualize the most famous graph search/traversal algorithms on a grid with height values</b></p>
+<p> <b>Find the shortest path from a starting point to ending point</b></p>
 
 <h3>Visualization of Algorithms:</h3>
 <li>Depth First Search</li>
@@ -19,8 +19,9 @@
 <li>Click on 'Eraser' button then select anywhere on the grid to remove any Walls, Roots, or Destinations</li>
 <li>Click on 'Raise Hill' button then select anywhere on the grid to create a hill on the grid</li>
 <li>Click on 'Lower Hill' button then select anywhere on the grid to create a valley on the grid</li>
-<li>Click on 'Raise Height' button then select anywhere on the grid to increase the height of a single square</li>
-<li>Click on 'Lower Height' button then select anywhere on the grid to decrease the height of a single square</li>
+<li>Click on 'Raise Height' button then select anywhere on the grid to increase the height of selected square</li>
+<li>Click on 'Lower Height' button then select anywhere on the grid to decrease the height of selected square</li>
+<li>Click on 'Erase Height' button then select anywhere on the grid to reset the height of selected square to 1</li>
 <li>Choose Algorithm from dropdown</li>
 <li>Click 'Start' to begin search</li>
 <li>Click 'Reset' to clear board</li>
