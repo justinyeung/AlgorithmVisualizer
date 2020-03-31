@@ -69,8 +69,8 @@ public class MainFrame extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 //				calculate array CanvasCoords given mouse address
-				int x = Math.floorDiv(e.getX(), 20);
-				int y = Math.floorDiv(e.getY(), 20);
+				int x = Math.floorDiv(e.getX(), 22);
+				int y = Math.floorDiv(e.getY(), 22);
 				
 //				change color of grid square depending on button press
 				if(rootClick) {
@@ -230,7 +230,7 @@ public class MainFrame extends JFrame {
 				}
 //				reset default root
 				grid.setColorTypeCoord(20, 12, Color.red, SquareType.ROOT);
-				grid.setRootCoords(20*20, 12*20);
+				grid.setRootCoords(20*22, 12*22);
 				
 //				initialize default destination
 				grid.setColorTypeCoord(43, 12, Color.blue, SquareType.DESTINATION);
@@ -325,7 +325,7 @@ public class MainFrame extends JFrame {
 		
 //		sets jframe
 		setVisible(true);
-		setSize(1280,720);
+		setSize(1400,800);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}
