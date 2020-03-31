@@ -19,14 +19,14 @@ public class Grid extends JPanel{
 	protected final int numI = 63; // length and width of grid
 	protected final int numJ = 25;
 	
-	private Font font = new Font("Arial", Font.BOLD, 12);
+	private Font font = new Font("Arial", Font.BOLD, 14);
 //	TODO: turn destArray to canvas coords
 //	private ArrayList<CanvasCoords> destArray; // array coords
 	
 	public Grid() {
 //		initialize
 		Dimension dim = getPreferredSize();
-		dim.height = 500;
+		dim.height = 550;
 		setPreferredSize(dim);
 		int count = 0;
 //		destArray = new ArrayList<>();
@@ -35,7 +35,7 @@ public class Grid extends JPanel{
 		squareArray = new Square[numI][numJ];
 		for(int i = 0; i < numI; i++) {
 			for(int j = 0; j < numJ; j++) {
-				squareArray[i][j] = new Square(count, i * 20, j * 20, Color.white, SquareType.SAFE);
+				squareArray[i][j] = new Square(count, i * 22, j * 22, Color.white, SquareType.SAFE);
 				count++;
 			}
 		}
@@ -43,7 +43,7 @@ public class Grid extends JPanel{
 //		initialize default root
 		squareArray[20][12].setColor(Color.red);
 		squareArray[20][12].setType(SquareType.ROOT);
-		setRootCoords(20*20, 12*20);
+		setRootCoords(20*22, 12*22);
 		
 //		initialize default destination
 		squareArray[43][12].setColor(Color.blue);
@@ -203,18 +203,24 @@ public class Grid extends JPanel{
 				color = current.getColor();
 //				draw color grids according to squareArray
 				g.setColor(color);
-				g.fillRect(x, y, 20, 20);
+				g.fillRect(x, y, 22, 22);
 //				draw rectangle borders
 				g.setColor(Color.black);
-				g.drawRect(x, y, 20, 20);
+				g.drawRect(x, y, 22, 22);
 //				draw height inside grid
 				Integer height = current.getHeight();
 				if(height >= 0 && height <= 9) {
-					g.drawString(current.getHeight().toString(), x+7, y+15);
-				}else if(height >= -9){
-					g.drawString(current.getHeight().toString(), x+4, y+15);
+//					0 <= x <= 9
+					g.drawString(current.getHeight().toString(), x+8, y+16);
+				}else if(height >= -9 && height < 0) {
+//					-9 <= x <= -1
+					g.drawString(current.getHeight().toString(), x+5, y+16);
+				}else if(height > 9){
+//					x > 9
+					g.drawString(current.getHeight().toString(), x+4, y+16);
 				}else {
-					g.drawString(current.getHeight().toString(), x+2, y+15);
+//					x < -9
+					g.drawString(current.getHeight().toString(), x+1, y+16);
 				}
 				
 			}
