@@ -1,7 +1,7 @@
 # Contour Map Pathfinding and Searching Algorithm Visualizer
 
 <p> <b>Visualize the most famous graph search/traversal algorithms on a grid with height values</b></p>
-<p> <b>Find the shortest path from a starting point to ending point</b></p>
+<p> <b>Find the shortest path from a starting point to ending point with respect to distance and height</b></p>
 
 <h3>Visualization of Algorithms:</h3>
 <li>Depth First Search</li>
