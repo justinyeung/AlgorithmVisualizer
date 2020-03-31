@@ -8,7 +8,7 @@
 <li>Breadth First Search</li>
 <li>Dijkstra's shortest path algorithm</li>
 <li><b>NOTE: </b></li>
-<li><ul>
+<ul>
   <li>DFS and BFS are unweighted so heights of squares are ignored</li>
   <li>Dijkstra's Algorithm ignores negative weights so height of square <1 are ignored</li>
   </ul>
