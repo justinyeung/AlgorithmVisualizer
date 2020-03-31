@@ -18,10 +18,10 @@ public class CanvasCoords {
 		return this.y;
 	}
 	public int getArrayX() {
-		return Math.floorDiv(this.x, 20);
+		return Math.floorDiv(this.x, 22);
 	}
 	public int getArrayY() {
-		return Math.floorDiv(this.y, 20);
+		return Math.floorDiv(this.y, 22);
 	}
 	
 //	setters

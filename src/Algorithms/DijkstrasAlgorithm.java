@@ -33,7 +33,7 @@ public class DijkstrasAlgorithm extends Search{
 			for(int j = 0; j < numJ; j++) {
 				if(visitedArray[i][j] == false && distances[i][j] <= min) {
 					min = distances[i][j];
-					minCoord = new CanvasCoords(i*20, j*20);
+					minCoord = new CanvasCoords(i*22, j*22);
 				}
 			}
 		}
