@@ -5,6 +5,8 @@ public interface ButtonListener {
 	public abstract void setDestination();
 	public abstract void setWall();
 	public abstract void erase();
+	public abstract void raiseHill();
+	public abstract void lowerHill();
 	public abstract void raiseHeight();
 	public abstract void lowerHeight();
 	public abstract void reset();

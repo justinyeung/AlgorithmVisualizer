@@ -15,6 +15,8 @@ public class Menu implements ActionListener{
 	private JButton wallButton;
 	private JButton rootButton;
 	private JButton destButton;
+	private JButton raiseHillButton;
+	private JButton sinkHillButton;
 	private JButton raiseButton;
 	private JButton sinkButton;
 	private JButton eraserButton;
@@ -27,7 +29,6 @@ public class Menu implements ActionListener{
 	JPanel firstline;
 	JPanel secondline;
 	JPanel lastline;
-	private boolean animationRunning;
 	
 	public Menu(){
 //		init components
@@ -38,8 +39,11 @@ public class Menu implements ActionListener{
 		selectionBox = new JComboBox<String>(selections);
 		startButton = new JButton("Start");
 		resetButton = new JButton("Reset");
+		raiseHillButton = new JButton("Raise Hill");
+		sinkHillButton = new JButton("Lower Hill");
 		raiseButton = new JButton("Raise Height");
 		sinkButton = new JButton("Lower Height");
+		
 		
 		firstline = new JPanel();
 		secondline = new JPanel();
@@ -55,6 +59,8 @@ public class Menu implements ActionListener{
 		firstline.add(rootButton);
 		firstline.add(destButton);
 		firstline.add(eraserButton);
+		secondline.add(raiseHillButton);
+		secondline.add(sinkHillButton);
 		secondline.add(raiseButton);
 		secondline.add(sinkButton);
 		lastline.add(selectionBox);
@@ -70,6 +76,8 @@ public class Menu implements ActionListener{
 		eraserButton.addActionListener(this);
 		raiseButton.addActionListener(this);
 		sinkButton.addActionListener(this);
+		raiseHillButton.addActionListener(this);
+		sinkHillButton.addActionListener(this);
 	}
 	
 	public void setButtonListener(ButtonListener listener) {
@@ -83,6 +91,8 @@ public class Menu implements ActionListener{
 		wallButton.setEnabled(true);
 		rootButton.setEnabled(true);
 		destButton.setEnabled(true);
+		raiseHillButton.setEnabled(true);
+		sinkHillButton.setEnabled(true);
 		raiseButton.setEnabled(true);
 		sinkButton.setEnabled(true);
 		eraserButton.setEnabled(true);
@@ -111,10 +121,18 @@ public class Menu implements ActionListener{
 			wallButton.setEnabled(false);
 			rootButton.setEnabled(false);
 			destButton.setEnabled(false);
+			raiseHillButton.setEnabled(false);
+			sinkHillButton.setEnabled(false);
 			raiseButton.setEnabled(false);
 			sinkButton.setEnabled(false);
 			eraserButton.setEnabled(false);
 			selectionBox.setEnabled(false);
+		}else if(e.getSource() == raiseHillButton) {
+			buttonListener.raiseHill();
+			raiseHillButton.setEnabled(false);
+		}else if(e.getSource() == sinkHillButton) {
+			buttonListener.lowerHill();
+			sinkHillButton.setEnabled(false);
 		}else if(e.getSource() == raiseButton) {
 			buttonListener.raiseHeight();
 			raiseButton.setEnabled(false);

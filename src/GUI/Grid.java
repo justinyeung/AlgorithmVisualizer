@@ -113,7 +113,7 @@ public class Grid extends JPanel{
 	public void setSquareArray(Square[][] squareArr) {
 		this.squareArray = squareArr;
 	}
-	public void raiseHeight(int x, int y) {
+	public void raiseHill(int x, int y) {
 //		get surrounding squares to create hill
 		Square current = squareArray[x][y];
 		Square right = current.getRight();
@@ -123,19 +123,19 @@ public class Grid extends JPanel{
 		
 //		right
 		if(current.getRight() != null && right.getHeight() < current.getHeight()) {
-			raiseHeight(right.getArrCoordX(), right.getArrCoordY());
+			raiseHill(right.getArrCoordX(), right.getArrCoordY());
 		}
 //		down
 		if(current.getDown() != null && down.getHeight() < current.getHeight()) {
-			raiseHeight(down.getArrCoordX(), down.getArrCoordY());
+			raiseHill(down.getArrCoordX(), down.getArrCoordY());
 		}
 //		left
 		if(current.getLeft() != null && left.getHeight() < current.getHeight()) {
-			raiseHeight(left.getArrCoordX(), left.getArrCoordY());
+			raiseHill(left.getArrCoordX(), left.getArrCoordY());
 		}
 //		up
 		if(current.getUp() != null && up.getHeight() < current.getHeight()) {
-			raiseHeight(up.getArrCoordX(), up.getArrCoordY());
+			raiseHill(up.getArrCoordX(), up.getArrCoordY());
 		}
 		
 //		increase current height
@@ -146,7 +146,7 @@ public class Grid extends JPanel{
 			return;
 		}
 	}
-	public void lowerHeight(int x, int y) {
+	public void lowerHill(int x, int y) {
 //		get surrounding squares to create hill
 		Square current = squareArray[x][y];
 		Square right = current.getRight();
@@ -156,19 +156,19 @@ public class Grid extends JPanel{
 		
 //		right
 		if(current.getRight() != null && right.getHeight() > current.getHeight()) {
-			lowerHeight(right.getArrCoordX(), right.getArrCoordY());
+			lowerHill(right.getArrCoordX(), right.getArrCoordY());
 		}
 //		down
 		if(current.getDown() != null && down.getHeight() > current.getHeight()) {
-			lowerHeight(down.getArrCoordX(), down.getArrCoordY());
+			lowerHill(down.getArrCoordX(), down.getArrCoordY());
 		}
 //		left
 		if(current.getLeft() != null && left.getHeight() > current.getHeight()) {
-			lowerHeight(left.getArrCoordX(), left.getArrCoordY());
+			lowerHill(left.getArrCoordX(), left.getArrCoordY());
 		}
 //		up
 		if(current.getUp() != null && up.getHeight() > current.getHeight()) {
-			lowerHeight(up.getArrCoordX(), up.getArrCoordY());
+			lowerHill(up.getArrCoordX(), up.getArrCoordY());
 		}
 		
 //		increase current height
@@ -178,6 +178,14 @@ public class Grid extends JPanel{
 		if(current.getHeight() == 0) {
 			return;
 		}
+	}
+	public void raiseHeight(int x, int y) {
+		Square current = squareArray[x][y];
+		current.incHeight();
+	}
+	public void lowerHeight(int x, int y) {
+		Square current = squareArray[x][y];
+		current.sinkHeight();
 	}
 	
 	public void paint(Graphics g) {
