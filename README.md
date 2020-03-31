@@ -8,10 +8,19 @@
 <li>Breadth First Search</li>
 <li>Dijkstra's shortest path algorithm</li>
 
-<h3>Instructions:</h3>
+<h3>Instructions to run:</h3>
+<li>Clone this repository</li>
+<li>Run the file 'app.java' in the 'src' folder</li>
+
+<h3>Tutorial:</h3>
 <li>Click on 'Wall' button then select anywhere on the grid to create barriers for search</li>
 <li>Click on 'Root' button then select anywhere on the grid to create a starting point for the algorithm</li>
 <li>Click on 'Destination' button then select anywhere on the grid to create destinations for the algorithm</li>
+<li>Click on 'Eraser' button then select anywhere on the grid to remove any Walls, Roots, or Destinations</li>
+<li>Click on 'Raise Hill' button then select anywhere on the grid to create a hill on the grid</li>
+<li>Click on 'Lower Hill' button then select anywhere on the grid to create a valley on the grid</li>
+<li>Click on 'Raise Height' button then select anywhere on the grid to increase the height of a single square</li>
+<li>Click on 'Lower Height' button then select anywhere on the grid to decrease the height of a single square</li>
 <li>Choose Algorithm from dropdown</li>
 <li>Click 'Start' to begin search</li>
 <li>Click 'Reset' to clear board</li>
