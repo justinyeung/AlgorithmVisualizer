@@ -19,6 +19,7 @@ public class Menu implements ActionListener{
 	private JButton sinkHillButton;
 	private JButton raiseButton;
 	private JButton sinkButton;
+	private JButton eraseHeightButton;
 	private JButton eraserButton;
 	private JComboBox<String> selectionBox;
 	private ButtonListener buttonListener;
@@ -31,7 +32,7 @@ public class Menu implements ActionListener{
 	JPanel lastline;
 	
 	public Menu(){
-//		init components
+//		initialize JComponents
 		wallButton = new JButton("Wall");
 		rootButton = new JButton("Root");
 		destButton = new JButton("Destination");
@@ -43,8 +44,9 @@ public class Menu implements ActionListener{
 		sinkHillButton = new JButton("Lower Hill");
 		raiseButton = new JButton("Raise Height");
 		sinkButton = new JButton("Lower Height");
+		eraseHeightButton = new JButton("Remove Height");
 		
-		
+//		initialize JPanels
 		firstline = new JPanel();
 		secondline = new JPanel();
 		lastline = new JPanel();
@@ -63,6 +65,7 @@ public class Menu implements ActionListener{
 		secondline.add(sinkHillButton);
 		secondline.add(raiseButton);
 		secondline.add(sinkButton);
+		secondline.add(eraseHeightButton);
 		lastline.add(selectionBox);
 		lastline.add(resetButton);
 		lastline.add(startButton);
@@ -78,6 +81,7 @@ public class Menu implements ActionListener{
 		sinkButton.addActionListener(this);
 		raiseHillButton.addActionListener(this);
 		sinkHillButton.addActionListener(this);
+		eraseHeightButton.addActionListener(this);
 	}
 	
 	public void setButtonListener(ButtonListener listener) {
@@ -97,6 +101,7 @@ public class Menu implements ActionListener{
 		sinkButton.setEnabled(true);
 		eraserButton.setEnabled(true);
 		selectionBox.setEnabled(true);
+		eraseHeightButton.setEnabled(true);
 		
 //		action listeners for jcomponents
 //		run methods in grid
@@ -126,6 +131,7 @@ public class Menu implements ActionListener{
 			raiseButton.setEnabled(false);
 			sinkButton.setEnabled(false);
 			eraserButton.setEnabled(false);
+			eraseHeightButton.setEnabled(false);
 			selectionBox.setEnabled(false);
 		}else if(e.getSource() == raiseHillButton) {
 			buttonListener.raiseHill();
@@ -142,6 +148,9 @@ public class Menu implements ActionListener{
 		}else if(e.getSource() == eraserButton) {
 			buttonListener.erase();
 			eraserButton.setEnabled(false);
+		}else if(e.getSource() == eraseHeightButton) {
+			buttonListener.eraseHeight();
+			eraseHeightButton.setEnabled(false);
 		}
 	}
 }

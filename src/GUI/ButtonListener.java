@@ -9,6 +9,7 @@ public interface ButtonListener {
 	public abstract void lowerHill();
 	public abstract void raiseHeight();
 	public abstract void lowerHeight();
+	public abstract void eraseHeight();
 	public abstract void reset();
 	public abstract void start(String algorithm);
 }

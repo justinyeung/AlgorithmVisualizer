@@ -32,6 +32,7 @@ public class MainFrame extends JFrame {
 	private boolean raiseHill;
 	private boolean lowerHill;
 	private boolean erase;
+	private boolean eraseHeight;
 	private Timer timer;
 	private boolean resetClicked = false;
 //	private boolean animationRunning = false;
@@ -110,6 +111,9 @@ public class MainFrame extends JFrame {
 						grid.setColorTypeCoord(x, y, Color.white, SquareType.SAFE);
 						grid.repaint();
 					}
+				}else if(eraseHeight) {
+					grid.resetHeight(x, y);
+					grid.repaint();
 				}
 			}
 			@Override
@@ -128,6 +132,7 @@ public class MainFrame extends JFrame {
 				erase = false;
 				raiseHill = false;
 				lowerHill = false;
+				eraseHeight = false;
 			}
 
 			@Override
@@ -140,6 +145,7 @@ public class MainFrame extends JFrame {
 				erase = false;
 				raiseHill = false;
 				lowerHill = false;
+				eraseHeight = false;
 			}
 
 			@Override
@@ -152,6 +158,7 @@ public class MainFrame extends JFrame {
 				erase = false;
 				raiseHill = false;
 				lowerHill = false;
+				eraseHeight = false;
 			}
 			
 			@Override
@@ -164,6 +171,7 @@ public class MainFrame extends JFrame {
 				erase = false;
 				raiseHill = true;
 				lowerHill = false;
+				eraseHeight = false;
 			}
 
 			@Override
@@ -176,6 +184,7 @@ public class MainFrame extends JFrame {
 				erase = false;
 				raiseHill = false;
 				lowerHill = true;
+				eraseHeight = false;
 			}
 			
 			@Override
@@ -188,6 +197,7 @@ public class MainFrame extends JFrame {
 				erase = false;
 				raiseHill = false;
 				lowerHill = false;
+				eraseHeight = false;
 			}
 
 			@Override
@@ -200,6 +210,7 @@ public class MainFrame extends JFrame {
 				erase = false;
 				raiseHill = false;
 				lowerHill = false;
+				eraseHeight = false;
 			}
 			
 			@Override
@@ -212,6 +223,20 @@ public class MainFrame extends JFrame {
 				erase = true;
 				raiseHill = false;
 				lowerHill = false;
+				eraseHeight = false;
+			}
+			
+			@Override
+			public void eraseHeight() {
+				wallClick = false;
+				rootClick = false;
+				destClick = false;
+				raiseHeight = false;
+				lowerHeight = false;
+				erase = false;
+				raiseHill = false;
+				lowerHill = false;
+				eraseHeight = true;
 			}
 
 			@Override
@@ -256,6 +281,7 @@ public class MainFrame extends JFrame {
 				erase = false;
 				raiseHill = false;
 				lowerHill = false;
+				eraseHeight = false;
 				
 //				conditional statement for which algorithm to use
 				if(algorithm == "Breadth First Search") {
