@@ -82,22 +82,39 @@ public class DijkstrasAlgorithm extends Search{
 //			sets distance if current dist + adjacent height < adjacent dist
 //			connect adjacent previousNodes linkedlist to current previousNodes linkedlist
 			if(right != null && right.getType() != SquareType.WALL && !isVisited(right) && getDist(current) + right.getHeight() < getDist(right)) {
-				distances[right.getArrCoordX()][right.getArrCoordY()] = getDist(current) + right.getHeight();
+//				conditional for negative values
+				if(right.getHeight() < 1) {
+					distances[right.getArrCoordX()][right.getArrCoordY()] = getDist(current) + 1;
+				}else {
+					distances[right.getArrCoordX()][right.getArrCoordY()] = getDist(current) + right.getHeight();
+				}
 				previousNodes[right.getArrCoordX()][right.getArrCoordY()].item = new CanvasCoords(right.getXcoord(), right.getYcoord());
 				previousNodes[right.getArrCoordX()][right.getArrCoordY()].next = previousNodes[current.getArrayX()][current.getArrayY()];
 			}
 			if(down != null && down.getType() != SquareType.WALL && !isVisited(down) && getDist(current) + down.getHeight() < getDist(down)) {
-				distances[down.getArrCoordX()][down.getArrCoordY()] = getDist(current) + down.getHeight();
+				if(down.getHeight() < 1) {
+					distances[down.getArrCoordX()][down.getArrCoordY()] = getDist(current) + 1;
+				}else {
+					distances[down.getArrCoordX()][down.getArrCoordY()] = getDist(current) + down.getHeight();
+				}
 				previousNodes[down.getArrCoordX()][down.getArrCoordY()].item = new CanvasCoords(down.getXcoord(), down.getYcoord());
 				previousNodes[down.getArrCoordX()][down.getArrCoordY()].next = previousNodes[current.getArrayX()][current.getArrayY()];
 			}
 			if(left != null && left.getType() != SquareType.WALL && !isVisited(left) && getDist(current) + left.getHeight() < getDist(left)) {
-				distances[left.getArrCoordX()][left.getArrCoordY()] = getDist(current) + left.getHeight();
+				if(left.getHeight() < 1) {
+					distances[left.getArrCoordX()][left.getArrCoordY()] = getDist(current) + 1;
+				}else {
+					distances[left.getArrCoordX()][left.getArrCoordY()] = getDist(current) + left.getHeight();
+				}
 				previousNodes[left.getArrCoordX()][left.getArrCoordY()].item = new CanvasCoords(left.getXcoord(), left.getYcoord());
 				previousNodes[left.getArrCoordX()][left.getArrCoordY()].next = previousNodes[current.getArrayX()][current.getArrayY()];
 			}
 			if(up != null && up.getType() != SquareType.WALL && !isVisited(up) && getDist(current) + up.getHeight() < getDist(up)) {
-				distances[up.getArrCoordX()][up.getArrCoordY()] = getDist(current) + up.getHeight();
+				if(up.getHeight() < 1) {
+					distances[up.getArrCoordX()][up.getArrCoordY()] = getDist(current) + 1;
+				}else {
+					distances[up.getArrCoordX()][up.getArrCoordY()] = getDist(current) + up.getHeight();
+				}
 				previousNodes[up.getArrCoordX()][up.getArrCoordY()].item = new CanvasCoords(up.getXcoord(), up.getYcoord());
 				previousNodes[up.getArrCoordX()][up.getArrCoordY()].next = previousNodes[current.getArrayX()][current.getArrayY()];
 			}
