@@ -17,9 +17,9 @@
   <li>Clone this repository</li>
   <li>Navigate to folder with cloned repo</li>
   <li>Open file 'AlgorithmVisualizer.jar'</li>
-</ul?
+</ul>
 
-<h3>Tutorial:</h3>
+<h3>Tutorial: </h3>
 <ul>
   <li>Click on 'Wall' button then select anywhere on the grid to create barriers for search</li>
   <li>Click on 'Root' button then select anywhere on the grid to create a starting point for the algorithm</li>
