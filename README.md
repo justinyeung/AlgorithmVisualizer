@@ -25,9 +25,7 @@ This visualizer is inside a .jar file. Clone this repository and you will get th
 - Click 'Reset' to clear board
 
 ## Results
-- Animation outlining how selected algorithm will work
-- Grey squares showing the squares that the algorithm checked
-- Yellow path showing the path the algorithm took to find destination
+An animation outlining how the selected algorithm will search and find the destination node. Nodes highlighted in grey show all the nodes that were searched and the nodes highlighted in yellow will show the shortest path that the selected algorithm took to find the destination node.
 
 ## Authors and acknowledgement
-This entire project as created by Justin Yeung
+This entire project was created by Justin Yeung
