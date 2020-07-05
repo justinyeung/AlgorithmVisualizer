@@ -2,10 +2,10 @@
 
 Visualize the most famous graph search/traversal algorithms on a grid with height values
 
-Find the shortest path from a starting point to ending point with respect to distance and height
-
 ## What is it?
-Contour Map pathfinding and searching algorithm visualizer that uses Depth First Search, Breadth First Search and Dijkstra's Algorithm to find the shortest path from start to finish, with respect to height and walls.
+A contour map pathfinding and searching algorithm visualizer that uses either Depth First Search, Breadth First Search or Dijkstra's Algorithm to find the shortest path from start to finish, with respect to height and walls.
+
+![animation gif](https://media.giphy.com/media/kDCPwBrPW8apwMCJbw/giphy.gif)
 
 ## Installation
 This visualizer is inside a .jar file. Clone this repository and you will get the .jar file and the source code.
